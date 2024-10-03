@@ -1,0 +1,125 @@
+﻿@{
+    Layout = null;
+    var login = Session["DN"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Header</title>
+    <style>
+        .nav-link {
+            color: blue;
+        }
+
+        .nav-item {
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    @*@if (login == null)
+        {*@
+    <nav class="navbar navbar-expand-lg">
+        <div class="col-2">
+            <a class="navbar-brand" href="/Home/TrangChu">
+                <img src="~/Content/images/logo/fahasa-logo.png" style="width: 100%" height="50" />
+            </a>
+        </div>
+        <div class="col-5">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 mm m-2">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/Home/Home">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Logout">Đăng ký</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Login">Đăng nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Contacts">Liên hệ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Introduce">Giới thiệu</a>
+                    </li>
+                    @*@Html.Action("GioHangPartial", "GioHang")*@
+                </ul>
+            </div>
+        </div>
+        <div class="col-3">
+            <form class="d-flex" role="search" method="post" action="/Home/SearchBook">
+                <input class="form-control me-2" name="txt_search" style="width: 250px" type="search" placeholder="Search" aria-label="Search">
+                <button style="margin-left: 50px" class="btn btn-outline-success" type="submit">
+                    <img src="~/Content/images/logo/iconsearch.png"20" height="20" />
+                </button>
+            </form>
+        </div>
+        <div class="col-2 text-center">
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Languages
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#"><img src="~/Images/VietNamFlag.jpg" width="30" height="30" />Vietnamese</a></li>
+                    <li><a class="dropdown-item" href="#"><img src="~/Images/EnglishFlag.jpg" width="30" height="30" />English</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @*}
+        else
+        {
+            <nav class="navbar navbar-expand-lg">
+                <div class="col-2">
+                    <a class="navbar-brand" href="/Home/TrangChu">
+                        <img src="~/Images/fahasa-logo.png" style="width: 100%" height="50" />
+                    </a>
+                </div>
+                <div class="col-5">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mm m-2">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/Home/TrangChu">Trang chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/LienHe">Liên hệ</a>
+                            </li>
+                            <li class="nav-item">
+                                <span class="nav-link text-bg-info">@login</span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-bg-danger" href="/Home/DangXuat">Đăng Xuất</a>
+                            </li>
+                            @Html.Action("GioHangPartial", "GioHang")
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" style="width: 250px" type="search" placeholder="Search" aria-label="Search">
+                        <button style="margin-left: 50px" class="btn btn-outline-success" type="submit">
+                            <img src="~/Images/iconsearch.png" />
+                        </button>
+                    </form>
+                </div>
+                <div class="col-2 text-center">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Languages
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><img src="~/Images/VietNamFlag.jpg" width="30" height="30" />Vietnamese</a></li>
+                            <li><a class="dropdown-item" href="#"><img src="~/Images/EnglishFlag.jpg" width="30" height="30" />English</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        }*@
+</body>
+</html>

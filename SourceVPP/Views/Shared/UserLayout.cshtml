@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <header>
+        @RenderPage("Header.cshtml");
+    </header>
+    <article>
+        <div class="row" style="margin-right: 0">
+            <div class="col-2" style="padding-right: 0">
+                @RenderPage("SidebarLeft.cshtml")
+            </div>
+            <div class="col" style="background-color: lightgray">
+                @RenderPage("Slide.cshtml")
+                @RenderBody()
+            </div>
+        </div>
+    </article>
+    <footer>
+        @RenderPage("Footer.cshtml");
+    </footer>
+</body>
+</html>
