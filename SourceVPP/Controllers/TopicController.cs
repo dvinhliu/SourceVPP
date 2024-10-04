@@ -20,10 +20,10 @@ namespace SourceVPP.Controllers
             var tmp = db.Sach.Where(s => s.MaChuDe == macd).OrderBy(s => s.GiaBan).ToList();
             if (tmp.Count > 0)
             {
-                return PartialView(tmp);
+                return View(tmp);
             }
             ViewBag.kq = "Không có sách nào để hiển thị";
-            return PartialView();
+            return View();
         }
     }
 }

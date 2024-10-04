@@ -1,22 +1,109 @@
 ﻿@{
-    Layout = null;
+Layout = null;
 }
+<style>
+    #footer a {
+        text-decoration: none; /* Bỏ gạch dưới */
+        color: inherit; /* Đặt màu sắc theo thẻ bao bọc */
+    }
 
-<!DOCTYPE html>
+        #footer a:hover {
+            text-decoration: underline; /* Thêm gạch dưới khi hover nếu muốn */
+            color: #000; /* Đổi màu khi hover nếu muốn */
+        }
+</style>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Footer</title>
-</head>
-<body>
-    <div class="row" style="margin-right: 0;">
-        <div style="background-color: orange; color: white; text-align: center; padding: 0">
-            <p>
-                Liên hệ: Công nghệ Thông tin - Trường Đại học Công Thương Tp.HCM Link: fanpage và Link: youtube <br />
-                Địa chỉ: 140 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, Tp.HCM. ĐT: (028).3816673 (ext 136) Mail: kcntt@hufi.edu.vn
-            </p>
+<section id="footer" style="background-color: #9FA7AB">
+    <div class="container">
+        <ul class="navbar-nav" style="text-decoration: none">
+            <li class="nav-item">
+                <a href=""><i class="fa fa-facebook"></i>ầdsf</a>
+            </li>
+            <li class="nav-item">
+                <a href=""><i class="fa fa-twitter"></i>fdsaf</a>
+            </li>
+            <li class="nav-item">
+                <a href=""><i class="fa fa-google-plus"></i>fdasf</a>
+            </li>
+            <li class="nav-item">
+                <a href=""><i class="fa fa-youtube"></i>adsfs</a>
+            </li>
+        </ul>
+    </div>
+</section>
+<section id="footer-button">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" id="ft-about">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco
+                </p>
+            </div>
+            <div class="col-md-3 box-footer">
+                <h3 class="tittle-footer">My accout</h3>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <i class="fa fa-angle-double-right"></i>
+                        <a href=""><i></i>Giới thiệu</a>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fa fa-angle-double-right"></i>
+                        <a href=""><i></i>Liên hệ</a>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fa fa-angle-double-right"></i>
+                        <a href=""><i></i>Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fa fa-angle-double-right"></i>
+                        <a href=""><i></i>My Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fa fa-angle-double-right"></i>
+                        <a href=""><i></i>Giới thiệu</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3 box-footer">
+                <h3 class="tittle-footer">My accout</h3>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <i class="fa fa-angle-double-right"></i>
+                        <a href=""><i></i>Giới thiệu</a>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fa fa-angle-double-right"></i>
+                        <a href=""><i></i>Liên hệ</a>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fa fa-angle-double-right"></i>
+                        <a href=""><i></i>Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fa fa-angle-double-right"></i>
+                        <a href=""><i></i>My Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fa fa-angle-double-right"></i>
+                        <a href=""><i></i>Giới thiệu</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3" id="footer-support">
+                <h3 class="tittle-footer">Liên hệ</h3>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <p><i class="fa fa-home" style="font-size: 16px;padding-right: 5px;"></i> 140 Lê Trọng Tấn - Tây Thạnh - Tân Phú - TP. Hồ Chí Minh </p>
+                        <p><i class="sp-ic fa fa-mobile" style="font-size: 22px;padding-right: 5px;"></i> 012345678</p>
+                        <p><i class="sp-ic fa fa-envelope" style="font-size: 13px;padding-right: 5px;"></i> support@gmail.com</p>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-</body>
-</html>
+</section>
+<section id="ft-bottom">
+    <p class="text-center">Giấy chứng nhận Đăng ký Kinh doanh số 0304132047 do Sở Kế hoạch và Đầu tư Thành phố Hồ Chí Minh cấp ngày 20/12/2005, đăng ký thay đổi lần thứ 10, ngày 20/05/2022.</p>
+</section>

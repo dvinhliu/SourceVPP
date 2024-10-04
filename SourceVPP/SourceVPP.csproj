@@ -317,9 +317,9 @@
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Cart\CartPartial.cshtml" />
     <Content Include="Views\Topic\TopicPartial.cshtml" />
-    <Content Include="Views\Topic\BookByTopic.cshtml" />
     <Content Include="Views\Book\BookPartial.cshtml" />
     <Content Include="Views\Author\AuthorPartial.cshtml" />
+    <Content Include="Views\Topic\BookByTopic.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

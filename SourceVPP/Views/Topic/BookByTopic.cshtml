@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<SourceVPP.Models.Sach>
 
+@{
+    ViewBag.Title = "BookByTopic";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
 <p style="text-align: center; font-size: 30px; margin-top: 10px">SÁCH THEO CHỦ ĐỀ</p>
 
 @if (ViewBag.kq != null)
@@ -21,3 +26,4 @@ else
         }
     </div>
 }
+

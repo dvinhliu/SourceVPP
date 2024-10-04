@@ -7,24 +7,39 @@
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header
+        {
+            background-color: white;
+        }
+        footer
+        {
+            background-color: white;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        @RenderPage("Header.cshtml");
-    </header>
-    <article>
-        <div class="row" style="margin-right: 0">
-            <div class="col-2" style="padding-right: 0">
-                @RenderPage("SidebarLeft.cshtml")
-            </div>
-            <div class="col" style="background-color: lightgray">
+<body style="background-color: #F0F0F0">
+    <div class="container">
+        <header>
+            @RenderPage("Header.cshtml")
+        </header>
+        <article>
+            <div class="row m-3">
                 @RenderPage("Slide.cshtml")
-                @RenderBody()
             </div>
-        </div>
-    </article>
-    <footer>
-        @RenderPage("Footer.cshtml");
-    </footer>
+
+            @RenderPage("SidebarLeft.cshtml")
+            @RenderBody()
+        </article>
+        <footer>
+            @RenderPage("Footer.cshtml")
+        </footer>
+    </div>
 </body>
 </html>
