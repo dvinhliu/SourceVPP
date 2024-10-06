@@ -119,6 +119,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\carousel.css" />
     <Content Include="Content\images\logo\Anh1.png" />
     <Content Include="Content\images\logo\Anh2.png" />
     <Content Include="Content\images\logo\Anh3.png" />
@@ -200,6 +201,7 @@
     <Content Include="Content\images\product\b.jpg" />
     <Content Include="Content\images\product\dsadas.jpg" />
     <Content Include="Content\images\product\nnn.jpg" />
+    <Content Include="Content\js\carousel.js" />
     <Content Include="Global.asax" />
     <Content Include="Models\QuanLyBanSach.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

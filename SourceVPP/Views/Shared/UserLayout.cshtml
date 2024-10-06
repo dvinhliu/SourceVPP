@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
-    <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+
+
+
     <style>
         *
         {
@@ -30,10 +32,7 @@
             @RenderPage("Header.cshtml")
         </header>
         <article>
-            <div class="row m-3">
-                @RenderPage("Slide.cshtml")
-            </div>
-
+            @RenderPage("Slide.cshtml")
             @RenderPage("SidebarLeft.cshtml")
             @RenderBody()
         </article>
@@ -41,5 +40,6 @@
             @RenderPage("Footer.cshtml")
         </footer>
     </div>
+
 </body>
 </html>

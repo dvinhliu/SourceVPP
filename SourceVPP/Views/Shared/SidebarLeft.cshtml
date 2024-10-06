@@ -9,11 +9,148 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>SidebarLeft</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/css/carousel.css">
+    <style>
+        .carousel-control-prev, .carousel-control-next 
+        {
+            background-color: rgba(255, 0, 0, 0.5); /* Màu nền với độ trong suốt */
+            border-radius: 50%; /* Để tạo hình tròn */
+            width: 50px; /* Kích thước nút */
+            height: 50px; /* Kích thước nút */
+        }
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            background-color: white; /* Màu sắc biểu tượng */
+            border-radius: 50%; /* Để tạo hình tròn cho biểu tượng */
+            width: 30px; /* Kích thước biểu tượng */
+            height: 30px; /* Kích thước biểu tượng */
+        }
+        .carousel-control-prev, .carousel-control-next {
+            background-color: rgba(255, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            background-color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+        }
+        .carousel {
+            position: relative; /* Để căn chỉnh các nút đúng cách */
+        }
+
+        .carousel-control-prev, .carousel-control-next {
+            background-color: rgba(255, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            top: 50%; /* Đưa nút lên giữa */
+            transform: translateY(-50%); /* Giúp căn chỉnh giữa theo chiều dọc */
+        }
+
+        .carousel-control-prev {
+            left: 10px; /* Khoảng cách từ bên trái */
+        }
+
+        .carousel-control-next {
+            right: 10px; /* Khoảng cách từ bên phải */
+        }
+    </style>
 </head>
 <body>
     <div class="list-group">
         @Html.Action("TopicPartial", "Topic")
         @Html.Action("AuthorPartial", "Author")
     </div>
+    <div id="carouselSidebar" class="carousel" data-bs-ride="carousel" style="margin-top: 10px; margin-bottom: 20px">
+        <div class="carousel-inner">
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="~/Content/images/logo/Anh1.png" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="~/Content/images/logo/Anh2.png" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="~/Content/images/logo/Anh3.png" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="~/Content/images/logo/Anh1.png" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="~/Content/images/logo/Anh1.png" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="~/Content/images/logo/Anh1.png" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next bg-danger" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="~/Content/js/carousel.js"></script>
 </body>
 </html>
