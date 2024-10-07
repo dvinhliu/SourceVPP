@@ -5,6 +5,28 @@
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
+<style>
+    .card-title:hover {
+        color: red;
+    }
+
+    .card-text {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .col:hover .card-text {
+        opacity: 1;
+    }
+
+    .col:hover {
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: #6b6b6b 0px 1px 8px 0px;
+    }
+</style>
+
+
 @Html.Partial("SidebarLeft")
 
 <p style="text-align: center; font-size: 30px; margin-top: 10px">@ViewBag.Company</p>
@@ -15,17 +37,21 @@
 }
 else
 {
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach (var item in Model)
-        {
-            <div class="col text-center">
-                <img src="~/Content/images/product/@item.HinhAnh" style="width: 150px; height: 200px">
-                <div class="card-body">
-                    <h5 class="card-title" style="font-size: 15px;">@item.TenSanPham</h5>
-                    @Html.ActionLink("Xem chi tiết", "XemChiTiet", "Laptop", new { id = item.MaSanPham }, new { style = "text-decoration: none" })
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-4 g-5" style="margin-bottom: 50px">
+            @foreach (var item in Model)
+            {
+                <div class="col text-center d-flex flex-column p-3">
+                    <img src="~/Content/images/product/@item.HinhAnh" style="width: 100%; height: 200px;">
+                    <div class="card-body mt-4" style="text-align: left">
+                        <h5 class="card-title" style="font-size: 15px; cursor:pointer">@item.TenSanPham</h5>
+                    </div>
+                    <div class="card-text mt-4">
+                        @Html.ActionLink("Thêm vào giỏ hàng ->", "XemChiTiet", null, new { id = item.MaSanPham }, new { style = "text-decoration: none; color: white; background-color: orange; border-radius: 10px; padding: 5px;" })
+                    </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 }
 
