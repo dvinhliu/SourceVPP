@@ -27,19 +27,14 @@
     </style>
 </head>
 <body style="background-color: #F0F0F0">
-    <div class="container">
-        <header>
-            @RenderPage("Header.cshtml")
-        </header>
-        <article>
-            @RenderPage("Slide.cshtml")
-            @RenderPage("SidebarLeft.cshtml")
-            @RenderBody()
-        </article>
-        <footer>
-            @RenderPage("Footer.cshtml")
-        </footer>
-    </div>
-
+    <header>
+        @RenderPage("Header.cshtml")
+    </header>
+    <article>
+        @RenderBody()
+    </article>
+    <footer>
+        @RenderPage("Footer.cshtml")
+    </footer>
 </body>
 </html>

@@ -12,19 +12,19 @@ namespace SourceVPP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class GioHang
+    public partial class giohang
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GioHang()
+        public giohang()
         {
-            this.ChiTietGioHang = new HashSet<ChiTietGioHang>();
+            this.chitietgiohang = new HashSet<chitietgiohang>();
         }
     
         public int MaGioHang { get; set; }
-        public Nullable<int> MaKH { get; set; }
+        public Nullable<int> MaTaiKhoan { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietGioHang> ChiTietGioHang { get; set; }
-        public virtual KhachHang KhachHang { get; set; }
+        public virtual ICollection<chitietgiohang> chitietgiohang { get; set; }
+        public virtual users users { get; set; }
     }
 }

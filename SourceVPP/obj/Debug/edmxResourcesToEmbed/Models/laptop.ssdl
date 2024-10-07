@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="laptopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="MaTaiKhoan" />
+    </Key>
+    <Property Name="MaTaiKhoan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenTaiKhoan" Type="nvarchar" MaxLength="255" />
+    <Property Name="MatKhau" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="chitietgiohang">
+    <Key>
+      <PropertyRef Name="MaGioHang" />
+      <PropertyRef Name="MaSanPham" />
+    </Key>
+    <Property Name="MaGioHang" Type="int" Nullable="false" />
+    <Property Name="MaSanPham" Type="int" Nullable="false" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="ThanhTien" Type="float" />
+  </EntityType>
+  <EntityType Name="chitiethoadon">
+    <Key>
+      <PropertyRef Name="MaHoaDon" />
+      <PropertyRef Name="MaSanPham" />
+    </Key>
+    <Property Name="MaHoaDon" Type="int" Nullable="false" />
+    <Property Name="MaSanPham" Type="int" Nullable="false" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="ThanhTien" Type="float" />
+  </EntityType>
+  <EntityType Name="giohang">
+    <Key>
+      <PropertyRef Name="MaGioHang" />
+    </Key>
+    <Property Name="MaGioHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaTaiKhoan" Type="int" />
+  </EntityType>
+  <EntityType Name="hang">
+    <Key>
+      <PropertyRef Name="MaHang" />
+    </Key>
+    <Property Name="MaHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenHang" Type="nvarchar" MaxLength="255" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="hoadon">
+    <Key>
+      <PropertyRef Name="MaHoaDon" />
+    </Key>
+    <Property Name="MaHoaDon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaTaiKhoan" Type="int" />
+    <Property Name="NgayMua" Type="date" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="255" />
+    <Property Name="SDT" Type="nvarchar" MaxLength="10" />
+    <Property Name="HinhThucThanhToan" Type="nvarchar" MaxLength="255" />
+    <Property Name="TongTien" Type="float" />
+    <Property Name="TrangThai" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="sanpham">
+    <Key>
+      <PropertyRef Name="MaSanPham" />
+    </Key>
+    <Property Name="MaSanPham" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenSanPham" Type="nvarchar" MaxLength="255" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+    <Property Name="HinhAnh" Type="nvarchar" MaxLength="255" />
+    <Property Name="GiaBan" Type="float" />
+    <Property Name="CPU" Type="nvarchar" MaxLength="255" />
+    <Property Name="Ram" Type="nvarchar" MaxLength="255" />
+    <Property Name="OCung" Type="nvarchar" MaxLength="255" />
+    <Property Name="ManHinh" Type="nvarchar" MaxLength="255" />
+    <Property Name="VGA" Type="nvarchar" MaxLength="255" />
+    <Property Name="HeDieuHanh" Type="nvarchar" MaxLength="255" />
+    <Property Name="TrongLuong" Type="nvarchar" MaxLength="255" />
+    <Property Name="Pin" Type="nvarchar" MaxLength="255" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="MaHang" Type="int" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="MaTaiKhoan" />
+    </Key>
+    <Property Name="MaTaiKhoan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenKhachHang" Type="nvarchar" MaxLength="255" />
+    <Property Name="TenTaiKhoan" Type="nvarchar" MaxLength="255" />
+    <Property Name="MatKhau" Type="nvarchar" MaxLength="255" />
+    <Property Name="Email" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK__chitietgi__MaGio__49C3F6B7">
+    <End Role="giohang" Type="Self.giohang" Multiplicity="1" />
+    <End Role="chitietgiohang" Type="Self.chitietgiohang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="giohang">
+        <PropertyRef Name="MaGioHang" />
+      </Principal>
+      <Dependent Role="chitietgiohang">
+        <PropertyRef Name="MaGioHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chitietgi__MaSan__4AB81AF0">
+    <End Role="sanpham" Type="Self.sanpham" Multiplicity="1" />
+    <End Role="chitietgiohang" Type="Self.chitietgiohang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sanpham">
+        <PropertyRef Name="MaSanPham" />
+      </Principal>
+      <Dependent Role="chitietgiohang">
+        <PropertyRef Name="MaSanPham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chitietho__MaHoa__4316F928">
+    <End Role="hoadon" Type="Self.hoadon" Multiplicity="1" />
+    <End Role="chitiethoadon" Type="Self.chitiethoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hoadon">
+        <PropertyRef Name="MaHoaDon" />
+      </Principal>
+      <Dependent Role="chitiethoadon">
+        <PropertyRef Name="MaHoaDon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chitietho__MaSan__440B1D61">
+    <End Role="sanpham" Type="Self.sanpham" Multiplicity="1" />
+    <End Role="chitiethoadon" Type="Self.chitiethoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sanpham">
+        <PropertyRef Name="MaSanPham" />
+      </Principal>
+      <Dependent Role="chitiethoadon">
+        <PropertyRef Name="MaSanPham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__giohang__MaTaiKh__46E78A0C">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="giohang" Type="Self.giohang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Principal>
+      <Dependent Role="giohang">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__hoadon__MaTaiKho__403A8C7D">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="hoadon" Type="Self.hoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Principal>
+      <Dependent Role="hoadon">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sanpham__MaHang__3D5E1FD2">
+    <End Role="hang" Type="Self.hang" Multiplicity="0..1" />
+    <End Role="sanpham" Type="Self.sanpham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hang">
+        <PropertyRef Name="MaHang" />
+      </Principal>
+      <Dependent Role="sanpham">
+        <PropertyRef Name="MaHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="laptopModelStoreContainer">
+    <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="chitietgiohang" EntityType="Self.chitietgiohang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="chitiethoadon" EntityType="Self.chitiethoadon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="giohang" EntityType="Self.giohang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="hang" EntityType="Self.hang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="hoadon" EntityType="Self.hoadon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sanpham" EntityType="Self.sanpham" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__chitietgi__MaGio__49C3F6B7" Association="Self.FK__chitietgi__MaGio__49C3F6B7">
+      <End Role="giohang" EntitySet="giohang" />
+      <End Role="chitietgiohang" EntitySet="chitietgiohang" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chitietgi__MaSan__4AB81AF0" Association="Self.FK__chitietgi__MaSan__4AB81AF0">
+      <End Role="sanpham" EntitySet="sanpham" />
+      <End Role="chitietgiohang" EntitySet="chitietgiohang" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chitietho__MaHoa__4316F928" Association="Self.FK__chitietho__MaHoa__4316F928">
+      <End Role="hoadon" EntitySet="hoadon" />
+      <End Role="chitiethoadon" EntitySet="chitiethoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chitietho__MaSan__440B1D61" Association="Self.FK__chitietho__MaSan__440B1D61">
+      <End Role="sanpham" EntitySet="sanpham" />
+      <End Role="chitiethoadon" EntitySet="chitiethoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__giohang__MaTaiKh__46E78A0C" Association="Self.FK__giohang__MaTaiKh__46E78A0C">
+      <End Role="users" EntitySet="users" />
+      <End Role="giohang" EntitySet="giohang" />
+    </AssociationSet>
+    <AssociationSet Name="FK__hoadon__MaTaiKho__403A8C7D" Association="Self.FK__hoadon__MaTaiKho__403A8C7D">
+      <End Role="users" EntitySet="users" />
+      <End Role="hoadon" EntitySet="hoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sanpham__MaHang__3D5E1FD2" Association="Self.FK__sanpham__MaHang__3D5E1FD2">
+      <End Role="hang" EntitySet="hang" />
+      <End Role="sanpham" EntitySet="sanpham" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

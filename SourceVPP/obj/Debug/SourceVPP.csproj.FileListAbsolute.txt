@@ -25,6 +25,6 @@ D:\BackupData\DACN\SourceVPP\SourceVPP\bin\Newtonsoft.Json.xml
 D:\BackupData\DACN\SourceVPP\SourceVPP\bin\System.Net.Http.Formatting.xml
 D:\BackupData\DACN\SourceVPP\SourceVPP\bin\System.Web.Http.xml
 D:\BackupData\DACN\SourceVPP\SourceVPP\bin\System.Web.Http.WebHost.xml
-D:\BackupData\DACN\SourceVPP\SourceVPP\obj\Debug\SourceVPP.csprojResolveAssemblyReference.cache
 D:\BackupData\DACN\SourceVPP\SourceVPP\obj\Debug\SourceVPP.dll
 D:\BackupData\DACN\SourceVPP\SourceVPP\obj\Debug\SourceVPP.pdb
+D:\BackupData\DACN\SourceVPP\SourceVPP\obj\Debug\SourceVPP.csprojResolveAssemblyReference.cache

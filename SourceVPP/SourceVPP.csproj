@@ -124,9 +124,24 @@
     <Content Include="Content\images\logo\Anh2.png" />
     <Content Include="Content\images\logo\Anh3.png" />
     <Content Include="Content\images\logo\Cart.png" />
+    <Content Include="Content\images\logo\deal.png" />
     <Content Include="Content\images\logo\EnglishFlag.JPG" />
     <Content Include="Content\images\logo\fahasa-logo.png" />
+    <Content Include="Content\images\logo\free-shipping.png" />
+    <Content Include="Content\images\logo\guaranteed.png" />
     <Content Include="Content\images\logo\iconsearch.png" />
+    <Content Include="Content\images\logo\LienHe.png" />
+    <Content Include="Content\images\logo\logoacer.png" />
+    <Content Include="Content\images\logo\logoapple.png" />
+    <Content Include="Content\images\logo\logoasus.jpg" />
+    <Content Include="Content\images\logo\logoasus.png" />
+    <Content Include="Content\images\logo\logodell.png" />
+    <Content Include="Content\images\logo\logohp.png" />
+    <Content Include="Content\images\logo\logolenovo.png" />
+    <Content Include="Content\images\logo\logolg.png" />
+    <Content Include="Content\images\logo\logomsi.png" />
+    <Content Include="Content\images\logo\logo_btv.jpeg" />
+    <Content Include="Content\images\logo\logo_btv.png" />
     <Content Include="Content\images\logo\VietNamFlag.JPG" />
     <Content Include="Content\images\product\000001.jpg" />
     <Content Include="Content\images\product\000002.jpg" />
@@ -197,21 +212,25 @@
     <Content Include="Content\images\product\a.jpg" />
     <Content Include="Content\images\product\a123.jpg" />
     <Content Include="Content\images\product\aadasdsa.jpg" />
+    <Content Include="Content\images\product\accessories.jpg" />
     <Content Include="Content\images\product\asp.net-mvc.jpg" />
     <Content Include="Content\images\product\b.jpg" />
+    <Content Include="Content\images\product\brunei.png" />
+    <Content Include="Content\images\product\cambodia.png" />
     <Content Include="Content\images\product\dsadas.jpg" />
     <Content Include="Content\images\product\nnn.jpg" />
+    <Content Include="Content\images\product\zenbook_14_oled_ux3405ma.PNG" />
     <Content Include="Content\js\carousel.js" />
     <Content Include="Global.asax" />
-    <Content Include="Models\QuanLyBanSach.Context.tt">
+    <Content Include="Models\laptop.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>QuanLyBanSach.edmx</DependentUpon>
-      <LastGenOutput>QuanLyBanSach.Context.cs</LastGenOutput>
+      <DependentUpon>laptop.edmx</DependentUpon>
+      <LastGenOutput>laptop.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\QuanLyBanSach.tt">
+    <Content Include="Models\laptop.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>QuanLyBanSach.edmx</DependentUpon>
-      <LastGenOutput>QuanLyBanSach.cs</LastGenOutput>
+      <DependentUpon>laptop.edmx</DependentUpon>
+      <LastGenOutput>laptop.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -224,58 +243,51 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AuthorController.cs" />
-    <Compile Include="Controllers\BookController.cs" />
+    <Compile Include="Controllers\LaptopController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TopicController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ChiTietDonHang.cs">
-      <DependentUpon>QuanLyBanSach.tt</DependentUpon>
+    <Compile Include="Models\admin.cs">
+      <DependentUpon>laptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ChiTietGioHang.cs">
-      <DependentUpon>QuanLyBanSach.tt</DependentUpon>
+      <DependentUpon>laptop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ChuDe.cs">
-      <DependentUpon>QuanLyBanSach.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DonHang.cs">
-      <DependentUpon>QuanLyBanSach.tt</DependentUpon>
+    <Compile Include="Models\chitiethoadon.cs">
+      <DependentUpon>laptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GioHang.cs">
-      <DependentUpon>QuanLyBanSach.tt</DependentUpon>
+      <DependentUpon>laptop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\KhachHang.cs">
-      <DependentUpon>QuanLyBanSach.tt</DependentUpon>
+    <Compile Include="Models\hang.cs">
+      <DependentUpon>laptop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\NhaXuatBan.cs">
-      <DependentUpon>QuanLyBanSach.tt</DependentUpon>
+    <Compile Include="Models\hoadon.cs">
+      <DependentUpon>laptop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\QuanLyBanSach.Context.cs">
+    <Compile Include="Models\laptop.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QuanLyBanSach.Context.tt</DependentUpon>
+      <DependentUpon>laptop.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\QuanLyBanSach.cs">
+    <Compile Include="Models\laptop.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QuanLyBanSach.tt</DependentUpon>
+      <DependentUpon>laptop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\QuanLyBanSach.Designer.cs">
+    <Compile Include="Models\laptop.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QuanLyBanSach.edmx</DependentUpon>
+      <DependentUpon>laptop.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Sach.cs">
-      <DependentUpon>QuanLyBanSach.tt</DependentUpon>
+    <Compile Include="Models\sanpham.cs">
+      <DependentUpon>laptop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TacGia.cs">
-      <DependentUpon>QuanLyBanSach.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ThamGia.cs">
-      <DependentUpon>QuanLyBanSach.tt</DependentUpon>
+    <Compile Include="Models\users.cs">
+      <DependentUpon>laptop.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -309,19 +321,28 @@
     <Content Include="Views\Shared\SidebarLeft.cshtml" />
     <Content Include="Views\Shared\Slide.cshtml" />
     <Content Include="Views\Shared\UserLayout.cshtml" />
-    <EntityDeploy Include="Models\QuanLyBanSach.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>QuanLyBanSach.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\QuanLyBanSach.edmx.diagram">
-      <DependentUpon>QuanLyBanSach.edmx</DependentUpon>
-    </Content>
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Cart\CartPartial.cshtml" />
-    <Content Include="Views\Topic\TopicPartial.cshtml" />
-    <Content Include="Views\Book\BookPartial.cshtml" />
-    <Content Include="Views\Author\AuthorPartial.cshtml" />
-    <Content Include="Views\Topic\BookByTopic.cshtml" />
+    <Content Include="Views\Company\CompanyPartial.cshtml" />
+    <Content Include="Views\Company\LaptopByCompany.cshtml" />
+    <EntityDeploy Include="Models\laptop.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>laptop.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\laptop.edmx.diagram">
+      <DependentUpon>laptop.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\images\product\enbook-17-fold-oled-ux9702aa-md014w-2_7.webp" />
+    <Content Include="Content\images\product\LaptopgamingDellAlienwareM15R6P109F001CBL.webp" />
+    <Content Include="Content\images\product\LaptopgamingDellG15 5530i7H165W11GR4060.webp" />
+    <Content Include="Content\images\product\LaptopgamingDellG155530i7H165W11GR4050.webp" />
+    <Content Include="Content\images\product\LaptopgamingHPOMEN16wf0129TX 8W943PA.webp" />
+    <Content Include="Content\images\product\LaptopgamingHPVICTUS16-s0078AX8C5N7PA.webp" />
+    <Content Include="Views\Laptop\LaptopPartial.cshtml" />
+    <Content Include="Content\images\product\LaptopgamingLenovoLegion716IRX9 83FD006JVN.webp" />
+    <Content Include="Content\images\product\LaptopgamingMSIVectorGP78HX13VI476VN.webp" />
+    <Content Include="Content\images\product\laptoplg.webp" />
+    <Content Include="Content\images\product\MacbookPro14M2Pro10CPU16GPU.webp" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

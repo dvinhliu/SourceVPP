@@ -12,14 +12,14 @@ namespace SourceVPP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ChiTietGioHang
+    public partial class chitietgiohang
     {
         public int MaGioHang { get; set; }
-        public int MaSach { get; set; }
+        public int MaSanPham { get; set; }
         public Nullable<int> SoLuong { get; set; }
-        public Nullable<decimal> DonGia { get; set; }
+        public Nullable<double> ThanhTien { get; set; }
     
-        public virtual GioHang GioHang { get; set; }
-        public virtual Sach Sach { get; set; }
+        public virtual giohang giohang { get; set; }
+        public virtual sanpham sanpham { get; set; }
     }
 }

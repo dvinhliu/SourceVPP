@@ -4,6 +4,11 @@
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
-<p style="text-align: center; font-size: 30px; margin-top: 10px">LIST BOOK</p>
-@Html.Action("BookPartial", "Book")
+@Html.Partial("Slide")
+@Html.Partial("SidebarLeft")
+
+<p style="text-align: center; font-size: 30px; margin-top: 10px">LAPTOP</p>
+<div class="container">
+    @Html.Action("LaptopPartial", "Laptop")
+</div>
 

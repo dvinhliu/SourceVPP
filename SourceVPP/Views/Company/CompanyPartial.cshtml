@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SourceVPP.Models.hang>
+
+    @foreach (var item in Model)
+    {
+        <div class="carousel-item">
+            <div class="card">
+                <div class="img-wrapper">
+                    <img src="~/Content/images/logo/@item.Logo" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title" style="text-transform: uppercase;">
+                        @Html.ActionLink(item.TenHang, "LaptopByCompany", "Company", new { mahang = item.MaHang }, new { style = "text-decoration: none" })
+                    </h5>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="carousel-item">
+        <div class="card">
+            <div class="img-wrapper">
+                <img src="~/Content/images/logo/free-shipping.png" class="card-img-top" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title" style="text-transform: uppercase">CLM</h5>
+            </div>
+        </div>
+    </div>
+    <div class="carousel-item">
+        <div class="card">
+            <div class="img-wrapper">
+                <img src="~/Content/images/logo/free-shipping.png" class="card-img-top" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title" style="text-transform: uppercase">MAY</h5>
+            </div>
+        </div>
+    </div>
+    <div class="carousel-item">
+        <div class="card">
+            <div class="img-wrapper">
+                <img src="~/Content/images/logo/free-shipping.png" class="card-img-top" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title" style="text-transform: uppercase">CON</h5>
+            </div>
+        </div>
+    </div>
+    <div class="carousel-item">
+        <div class="card">
+            <div class="img-wrapper">
+                <img src="~/Content/images/logo/free-shipping.png" class="card-img-top" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title" style="text-transform: uppercase">CAC</h5>
+            </div>
+        </div>
+    </div>
+
+
+

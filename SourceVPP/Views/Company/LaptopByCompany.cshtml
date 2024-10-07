@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SourceVPP.Models.sanpham>
+
+@{
+    ViewBag.Title = "LaptopByCompany";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+@Html.Partial("SidebarLeft")
+
+<p style="text-align: center; font-size: 30px; margin-top: 10px">@ViewBag.Company</p>
+
+@if (ViewBag.kq != null)
+{
+    <p style="text-align:center; font-weight: bold; color: red">@ViewBag.kq</p>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col text-center">
+                <img src="~/Content/images/product/@item.HinhAnh" style="width: 150px; height: 200px">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: 15px;">@item.TenSanPham</h5>
+                    @Html.ActionLink("Xem chi tiết", "XemChiTiet", "Laptop", new { id = item.MaSanPham }, new { style = "text-decoration: none" })
+                </div>
+            </div>
+        }
+    </div>
+}
+
