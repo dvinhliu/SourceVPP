@@ -7,28 +7,89 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Slide</title>
+    <!-- Thêm Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container1 {
+            display: flex; /* Sử dụng Flexbox để sắp xếp */
+            padding: 0;
+        }
+
+        .container1 .carousel {
+            flex: 0 0 68%; /* Chiếm 68% chiều rộng */
+            height: 100%; /* Đặt chiều cao của carousel */
+        }
+
+        .right-images {
+            flex: 0 0 31%; /* Chiếm 31% chiều rộng */
+            display: flex;
+            flex-direction: column; /* Sắp xếp hình ảnh theo chiều dọc */
+            justify-content: flex-start; /* Bắt đầu từ trên cùng */
+            margin-left: 8px; /* Khoảng cách bên trái với carousel */
+            height: 100%; /* Đặt chiều cao của right-images để khớp với chiều cao của carousel */
+            box-sizing: border-box; /* Bao gồm padding và border vào chiều rộng */
+            overflow-y: auto; /* Cho phép cuộn dọc nếu nội dung vượt quá chiều cao */
+        }
+
+        .right-images img {
+            width: 100%; /* Đặt chiều rộng của hình ảnh bằng 100% */
+            height: 50%; /* Đặt chiều cao tự động để giữ nguyên tỉ lệ */
+            padding: 0;
+            margin: 0;
+            object-fit: contain; /* Đảm bảo hình ảnh không bị méo */
+        }
+
+        /* Xóa khoảng cách cho ảnh cuối */
+        .right-images img:nth-last-child() {
+            margin-top: 8px;
+        }
+    </style>
 </head>
 <body>
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="margin-top: 10px; margin-bottom: 20px">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="~/Content/images/logo/Anh1.png" class="d-block w-100" width="100%" height="300" alt="Anh1">
+    <div class="container1">
+        <div id="carouselExampleIndicators" class="carousel slide p-0" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
             </div>
-            <div class="carousel-item">
-                <img src="~/Content/images/logo/Anh2.png" class="d-block w-100" width="100%" height="300" alt="Anh2">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/Content/images/logo/banner1.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Content/images/logo/banner2.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Content/images/logo/banner3.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Content/images/logo/banner4.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Content/images/logo/banner5.png" class="d-block w-100" alt="...">
+                </div>
             </div>
-            <div class="carousel-item">
-                <img src="~/Content/images/logo/Anh3.png" class="d-block w-100" width="100%" height="300" alt="Anh3">
-            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+
+        <div class="right-images">
+            <img src="~/Content/images/logo/bannerright1.png" alt="Right Banner 1" />
+            <img src="~/Content/images/logo/bannerirght2.png" alt="Right Banner 2" />
+        </div>
     </div>
+
+    <!-- Thêm Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

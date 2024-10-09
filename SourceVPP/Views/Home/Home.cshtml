@@ -4,11 +4,18 @@
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
-@Html.Partial("Slide")
-@Html.Partial("SidebarLeft")
 
-<p style="text-align: center; font-size: 30px; margin-top: 10px; font-weight: bold">LAPTOP</p>
-<div class="container">
-    @Html.Action("LaptopPartial", "Laptop")
+
+<div class="container p-0">
+    <div class="row">
+        @Html.Partial("Slide")
+    </div>
+    <div class="row">
+        @Html.Partial("SidebarLeft")
+    </div>
+    <div class="row">
+        <p style="text-align: center; font-size: 30px; margin-top: 10px; font-weight: bold">LAPTOP</p>
+        @Html.Action("LaptopPartial", "Laptop")
+    </div>
 </div>
 

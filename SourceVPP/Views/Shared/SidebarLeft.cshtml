@@ -10,26 +10,48 @@
     <link rel="stylesheet" type="text/css" href="~/Content/css/carousel.css">
     <style>
         .custom-prev, .custom-next {
-            background-color: rgba(255, 0, 0, 0.5);
+            background-color: black; /* Màu nền khi không hover */
+            padding: 4px;
             border-radius: 50%;
-            width: 50px;
-            height: 50px; 
-            top: 50%;
-            transform: translateY(-50%);
+            width: 25px;
+            height: 25px;
+            position: absolute; /* Đặt nút ở vị trí tuyệt đối */
+            top: 50%; /* Đặt nút ở giữa theo chiều dọc */
+            transform: translate(-50%, -50%); /* Giữ nút ở giữa, điều chỉnh theo chiều dọc và ngang */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển tiếp khi hover */
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.6); /* Hiệu ứng bóng cho nút màu trắng */
         }
+
         .carousel {
-            position: relative;
+            position: relative; /* Để có thể sử dụng position:absolute cho các nút */
         }
-        .carousel-control-prev {
-            left: 10px;
-        }
+
         .carousel-control-next {
-            right: 10px;
+            right: -25px; /* Đặt nút sát mép bên phải */
+        }
+
+        .carousel-inner {
+            position: relative; /* Để có thể sử dụng hover */
+        }
+
+        /* Khi hover vào carousel-inner, nút cũng sẽ zoom */
+        .carousel-inner:hover ~ .custom-prev,
+        .carousel-inner:hover ~ .custom-next {
+            transform: translate(-50%, -50%) scale(2); /* Tăng kích thước và giữ vị trí khi hover */
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.8); /* Tăng độ bóng khi hover, màu trắng */
+        }
+
+        /* Khi hover vào chính các nút, chúng cũng sẽ zoom */
+        .custom-prev:hover,
+        .custom-next:hover {
+            transform: translate(-50%, -50%) scale(2); /* Tăng kích thước khi hover */
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.6); /* Tăng độ bóng khi hover, màu trắng */
         }
     </style>
+
 </head>
 <body>
-    <div id="carouselSidebar" class="carousel" data-bs-ride="carousel" style="margin-top: 10px; margin-bottom: 20px">
+    <div id="carouselSidebar" class="carousel p-0" data-bs-ride="carousel">
         <div class="carousel-inner">
             @Html.Action("CompanyPartial", "Company")
         </div>
