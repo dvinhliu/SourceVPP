@@ -314,3 +314,51 @@ async function checkUsername(username) {
         return false; // Hoặc xử lý lỗi theo cách khác
     }
 }
+
+async function sendResetPasswordEmail(email) {
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${apiKey}`;
+
+    const data = {
+        requestType: 'PASSWORD_RESET',
+        email: email
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            return true;
+        } else {
+            console.log('Có lỗi xảy ra:', result.error);
+        }
+    } catch (error) {
+        console.error("Có lỗi xảy ra khi gửi email:", error);
+    }
+}
+
+async function checkEmailResetPassword(email) {
+    try {
+        const response = await fetch('/User/CheckEmailUserExists', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email }),
+        });
+
+        const result = await response.json();
+        console.log(result);
+        return result.exists;
+    } catch (error) {
+        console.error("Có lỗi xảy ra khi kiểm tra email reset password:", error);
+        return false; // Hoặc xử lý lỗi theo cách khác
+    }
+}

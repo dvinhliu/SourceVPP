@@ -46,7 +46,6 @@ namespace SourceVPP.Controllers
         {
             return View();
         }
-
         public async Task<ActionResult> GoogleSignIn(string token)
         {
             try
@@ -56,6 +55,7 @@ namespace SourceVPP.Controllers
                 string email = decodedToken.Claims["email"].ToString();
                 string displayName = decodedToken.Claims["name"].ToString();
                 string userName = email.Substring(0, email.IndexOf('@'));
+                string photoUrl = decodedToken.Claims.ContainsKey("picture") ? decodedToken.Claims["picture"].ToString() : null;
                 // Kiểm tra hoặc tạo người dùng mới dựa trên email
                 var user = db.users.SingleOrDefault(u => u.Email == email);
                 if (user == null)
@@ -65,7 +65,8 @@ namespace SourceVPP.Controllers
                         MaTaiKhoan = uid,
                         Email = email,
                         TenKhachHang = displayName,
-                        TenTaiKhoan = userName
+                        TenTaiKhoan = userName,
+                        ImageProfile = photoUrl
                     };
                     db.users.InsertOnSubmit(user);
                     db.SubmitChanges();
@@ -87,6 +88,15 @@ namespace SourceVPP.Controllers
                 // Xử lý lỗi chung
                 return Json(new { success = false, message = "Đã xảy ra lỗi: " + ex.Message });
             }
+        }
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+        public ActionResult ResetPassword(string email)
+        {
+            ViewBag.Email = email; // Lưu email vào ViewBag
+            return View();
         }
     }
 }

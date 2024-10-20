@@ -193,6 +193,9 @@
     <Content Include="Content\images\logo\fahasa-logo.png" />
     <Content Include="Content\images\logo\free-shipping.png" />
     <Content Include="Content\images\logo\guaranteed.png" />
+    <Content Include="Content\images\logo\icons8-back-100.png" />
+    <Content Include="Content\images\logo\icons8-email-100.png" />
+    <Content Include="Content\images\logo\icons8-error-100.png" />
     <Content Include="Content\images\logo\iconsearch.png" />
     <Content Include="Content\images\logo\LienHe.png" />
     <Content Include="Content\images\logo\logoacer.png" />
@@ -376,6 +379,8 @@
       <DependentUpon>laptop.dbml</DependentUpon>
     </None>
     <Content Include="Views\Home\SignUp.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
+    <Content Include="Views\Home\ResetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

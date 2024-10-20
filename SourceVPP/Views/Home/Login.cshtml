@@ -112,7 +112,9 @@
                                 <div class="row gy-3 overflow-hidden">
                                     <div class="col-12">
                                         <!-- Thông báo lỗi -->
-                                        <div class="alert alert-danger" id="notificationLogin" style="display: none;"></div>
+                                        <div class="alert alert-danger" id="notificationLogin" style="display: none;">
+                                            <i class="fa-solid fa-xmark"></i><i class="fa-solid fa-xmark"></i>
+                                        </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
@@ -135,7 +137,7 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="text-end">
-                                                    <a href="#!" class="link-secondary text-decoration-none">Quên mật khẩu?</a>
+                                                    <a href="/Home/ForgotPassword" class="link-secondary text-decoration-none">Quên mật khẩu?</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -201,9 +203,6 @@
                 if (check) {
                     window.location.replace('/Home/Home');
                 }
-            }
-            else {
-                document.getElementById('notificationLogin').style.display = 'none';
             }
         });
         document.getElementById('google-signin').addEventListener('click', function () {

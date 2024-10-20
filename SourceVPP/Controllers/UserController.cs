@@ -54,6 +54,12 @@ namespace SourceVPP.Controllers
             return Json(new { exists = userExists }, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult CheckEmailUserExists(string email)
+        {
+            var emailExists = db.users.Any(u => u.Email == email);
+            return Json(new { exists = emailExists }, JsonRequestBehavior.AllowGet);
+        }
+
         // POST: User/RefreshToken
         [System.Web.Http.HttpPost]
         public async Task<ActionResult> RefreshToken([FromBody] TokenRequest request)
