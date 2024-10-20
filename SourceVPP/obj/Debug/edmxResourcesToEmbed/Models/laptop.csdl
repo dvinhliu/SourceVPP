@@ -37,9 +37,9 @@
       <PropertyRef Name="MaGioHang" />
     </Key>
     <Property Name="MaGioHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaTaiKhoan" Type="Int32" />
+    <Property Name="MaTaiKhoan" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="chitietgiohang" Relationship="Self.FK__chitietgi__MaGio__49C3F6B7" FromRole="giohang" ToRole="chitietgiohang" />
-    <NavigationProperty Name="users" Relationship="Self.FK__giohang__MaTaiKh__46E78A0C" FromRole="giohang" ToRole="users" />
+    <NavigationProperty Name="users" Relationship="Self.FK_giohang_users" FromRole="giohang" ToRole="users" />
   </EntityType>
   <EntityType Name="hang">
     <Key>
@@ -55,7 +55,7 @@
       <PropertyRef Name="MaHoaDon" />
     </Key>
     <Property Name="MaHoaDon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaTaiKhoan" Type="Int32" />
+    <Property Name="MaTaiKhoan" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="NgayMua" Type="DateTime" Precision="0" />
     <Property Name="DiaChi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="SDT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -63,7 +63,7 @@
     <Property Name="TongTien" Type="Double" />
     <Property Name="TrangThai" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="chitiethoadon" Relationship="Self.FK__chitietho__MaHoa__4316F928" FromRole="hoadon" ToRole="chitiethoadon" />
-    <NavigationProperty Name="users" Relationship="Self.FK__hoadon__MaTaiKho__403A8C7D" FromRole="hoadon" ToRole="users" />
+    <NavigationProperty Name="users" Relationship="Self.FK_hoadon_users" FromRole="hoadon" ToRole="users" />
   </EntityType>
   <EntityType Name="sanpham">
     <Key>
@@ -88,17 +88,27 @@
     <NavigationProperty Name="chitiethoadon" Relationship="Self.FK__chitietho__MaSan__440B1D61" FromRole="sanpham" ToRole="chitiethoadon" />
     <NavigationProperty Name="hang" Relationship="Self.FK__sanpham__MaHang__3D5E1FD2" FromRole="sanpham" ToRole="hang" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="users">
     <Key>
       <PropertyRef Name="MaTaiKhoan" />
     </Key>
-    <Property Name="MaTaiKhoan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TenKhachHang" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="TenTaiKhoan" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="MatKhau" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MaTaiKhoan" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenKhachHang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TenTaiKhoan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MatKhau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="giohang" Relationship="Self.FK__giohang__MaTaiKh__46E78A0C" FromRole="users" ToRole="giohang" />
-    <NavigationProperty Name="hoadon" Relationship="Self.FK__hoadon__MaTaiKho__403A8C7D" FromRole="users" ToRole="hoadon" />
+    <NavigationProperty Name="giohang" Relationship="Self.FK_giohang_users" FromRole="users" ToRole="giohang" />
+    <NavigationProperty Name="hoadon" Relationship="Self.FK_hoadon_users" FromRole="users" ToRole="hoadon" />
   </EntityType>
   <Association Name="FK__chitietgi__MaGio__49C3F6B7">
     <End Role="giohang" Type="Self.giohang" Multiplicity="1" />
@@ -148,7 +158,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__giohang__MaTaiKh__46E78A0C">
+  <Association Name="FK_giohang_users">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="giohang" Type="Self.giohang" Multiplicity="*" />
     <ReferentialConstraint>
@@ -172,7 +182,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__hoadon__MaTaiKho__403A8C7D">
+  <Association Name="FK_hoadon_users">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="hoadon" Type="Self.hoadon" Multiplicity="*" />
     <ReferentialConstraint>
@@ -192,6 +202,7 @@
     <EntitySet Name="hang" EntityType="Self.hang" />
     <EntitySet Name="hoadon" EntityType="Self.hoadon" />
     <EntitySet Name="sanpham" EntityType="Self.sanpham" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="users" EntityType="Self.users" />
     <AssociationSet Name="FK__chitietgi__MaGio__49C3F6B7" Association="Self.FK__chitietgi__MaGio__49C3F6B7">
       <End Role="giohang" EntitySet="giohang" />
@@ -209,7 +220,7 @@
       <End Role="sanpham" EntitySet="sanpham" />
       <End Role="chitiethoadon" EntitySet="chitiethoadon" />
     </AssociationSet>
-    <AssociationSet Name="FK__giohang__MaTaiKh__46E78A0C" Association="Self.FK__giohang__MaTaiKh__46E78A0C">
+    <AssociationSet Name="FK_giohang_users" Association="Self.FK_giohang_users">
       <End Role="users" EntitySet="users" />
       <End Role="giohang" EntitySet="giohang" />
     </AssociationSet>
@@ -217,7 +228,7 @@
       <End Role="hang" EntitySet="hang" />
       <End Role="sanpham" EntitySet="sanpham" />
     </AssociationSet>
-    <AssociationSet Name="FK__hoadon__MaTaiKho__403A8C7D" Association="Self.FK__hoadon__MaTaiKho__403A8C7D">
+    <AssociationSet Name="FK_hoadon_users" Association="Self.FK_hoadon_users">
       <End Role="users" EntitySet="users" />
       <End Role="hoadon" EntitySet="hoadon" />
     </AssociationSet>

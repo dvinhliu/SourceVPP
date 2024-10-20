@@ -29,11 +29,41 @@
         }
 
         .logo img {
-            max-height: 80px; /* Giới hạn chiều cao tối đa */
-            width: 100%; /* Đảm bảo chiếm 100% chiều rộng */
-            object-fit: contain; /* Đảm bảo logo không bị méo */
+            max-height: 80px;
+            width: 100%;
+            object-fit: contain;
+        }
+
+        .is-invalid {
+            border-color: red;
+        }
+
+        .invalid-feedback {
+            display: none;
+            color: red;
+            font-size: 12px;
+        }
+
+        .is-invalid ~ .invalid-feedback {
+            display: block;
         }
     </style>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyC7PsMUUTQancVCjMl0NnbDVDl0tpWdZDY",
+            authDomain: "ecommercevpp.firebaseapp.com",
+            projectId: "ecommercevpp",
+            storageBucket: "ecommercevpp.appspot.com",
+            messagingSenderId: "867737625124",
+            appId: "1:867737625124:web:b7df5e4e371340b3ce2eb1"
+        };
+
+        // Khởi tạo Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="~/Content/js/User.js"></script>
 </head>
 <body>
     <div class="top-bar py-2">
@@ -51,7 +81,7 @@
                     <!-- Đăng nhập -->
                     <ul class="navbar-nav flex-row ms-3">
                         <li class="nav-item text-white">
-                            <a class="nav-link" href="/Home/Login">Đăng nhập</a>
+                            <a class="nav-link" href="/Home/Home">Đăng nhập</a>
                         </li>
                     </ul>
                 </div>
@@ -70,7 +100,7 @@
                 <div class="col-12">
                     <div class="mb-5">
                         <h2 class="display-5 text-center">Đăng nhập</h2>
-                        <p class="text-center m-0">Bạn mới biết đến Sopee? <a style="text-decoration: none; color: #ee4d2d" href="#!">Đăng ký</a></p>
+                        <p class="text-center m-0">Bạn mới biết đến Sopee? <a style="text-decoration: none; color: #ee4d2d" href="/Home/SignUp">Đăng ký</a></p>
                     </div>
                 </div>
             </div>
@@ -78,18 +108,24 @@
                 <div class="col-12 col-lg-10 col-xl-8">
                     <div class="row gy-5 justify-content-center">
                         <div class="col-12 col-lg-5">
-                            <form action="#!">
+                            <form id="loginForm">
                                 <div class="row gy-3 overflow-hidden">
                                     <div class="col-12">
+                                        <!-- Thông báo lỗi -->
+                                        <div class="alert alert-danger" id="notificationLogin" style="display: none;"></div>
+                                    </div>
+                                    <div class="col-12">
                                         <div class="form-floating mb-3">
-                                            <input type="email" class="form-control border-0 border-bottom rounded-0" name="email" id="email" placeholder="name@example.com" required>
+                                            <input type="email" class="form-control border-0 border-bottom rounded-0" name="email" id="email" placeholder="name@example.com">
                                             <label for="email" class="form-label">Email</label>
+                                            <div class="invalid-feedback">Vui lòng nhập địa chỉ email hợp lệ.</div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
-                                            <input type="password" class="form-control border-0 border-bottom rounded-0" name="password" id="password" value="" placeholder="Password" required>
+                                            <input type="password" class="form-control border-0 border-bottom rounded-0" name="password" id="password" value="" placeholder="Password">
                                             <label for="password" class="form-label">Mật khẩu</label>
+                                            <div class="invalid-feedback">Vui lòng nhập mật khẩu.</div>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -106,7 +142,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="d-grid">
-                                            <button class="btn btn-primary btn-lg" type="submit">ĐĂNG NHẬP</button>
+                                            <button class="btn btn-primary btn-lg" id="signin-password" type="submit">ĐĂNG NHẬP</button>
                                         </div>
                                     </div>
                                 </div>
@@ -121,12 +157,12 @@
                         </div>
                         <div class="col-12 col-lg-5 d-flex align-items-center">
                             <div class="d-flex gap-3 flex-column w-100">
-                                <a href="#!" class="btn btn-lg btn-danger">
+                                <button id="google-signin" class="btn btn-lg btn-danger">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
                                         <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z" />
                                     </svg>
                                     <span class="ms-2 fs-6">Google</span>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -134,5 +170,72 @@
             </div>
         </div>
     </section>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            let isValid = true;
+
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+
+            if (email.value.trim() === "") {
+                email.classList.add("is-invalid");
+                isValid = false;
+            }
+            else {
+                email.classList.remove("is-invalid");
+            }
+
+            if (password.value.trim() === "") {
+                password.classList.add("is-invalid");
+                isValid = false;
+            }
+            else {
+                password.classList.remove("is-invalid");
+            }
+
+            if (isValid) {
+                const check = await SignWithPassword(email.value.trim(), password.value.trim());
+                if (check) {
+                    window.location.replace('/Home/Home');
+                }
+            }
+            else {
+                document.getElementById('notificationLogin').style.display = 'none';
+            }
+        });
+        document.getElementById('google-signin').addEventListener('click', function () {
+            var provider = new firebase.auth.GoogleAuthProvider();
+
+            // Gọi firebase.auth() đúng cách
+            firebase.auth().signInWithPopup(provider).then(function (result) {
+                // Lấy token từ Firebase
+                result.user.getIdToken().then(function (token) {
+                    fetch('/Home/GoogleSignIn', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ token: token })
+                    }).then(function (response) {
+                        return response.json(); // Chuyển đổi phản hồi thành JSON
+                    }).then(function (data) {
+                        if (data.success) {
+                            // Lưu token vào localStorage
+                            localStorage.setItem('token', data.token);
+
+                            window.location.replace('/Home/Home');
+                        } else {
+                            console.log('Đăng nhập không thành công: ' + data.message);
+                        }
+                    });
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        });
+    </script>
 </body>
 </html>

@@ -10,10 +10,10 @@ namespace SourceVPP.Controllers
     public class LaptopController : Controller
     {
         // GET: Book
-        laptopEntities db = new laptopEntities();
+        laptopDataContext db = new laptopDataContext();
         public ActionResult LaptopPartial()
         {
-            return PartialView(db.sanpham.ToList());
+            return PartialView(db.sanphams.ToList());
         }
         public ActionResult LaptopDetails()
         {

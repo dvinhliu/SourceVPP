@@ -1,6 +1,5 @@
 ﻿@{
     Layout = null;
-    var login = Session["DN"];
 }
 
 <!DOCTYPE html>
@@ -9,6 +8,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Header</title>
+    <script src="~/Content/js/User.js"></script>
     <style>
         /* Bao toàn bộ header để style không ảnh hưởng đến các trang khác */
         .custom-header .nav-item {
@@ -21,23 +21,23 @@
             margin-bottom: 0px; /* Loại bỏ khoảng cách dưới top-bar */
         }
 
-        .custom-header .top-bar .nav-link {
-            color: white;
-            margin-left: 15px;
-        }
+            .custom-header .top-bar .nav-link {
+                color: white;
+                margin-left: 15px;
+            }
 
-        .custom-header .top-bar .nav-link:hover {
-            color: #adb5bd;
-        }
+                .custom-header .top-bar .nav-link:hover {
+                    color: #adb5bd;
+                }
 
         .custom-header .nav-item .nav-link {
             color: white;
             font-weight: 500;
         }
 
-        .custom-header .nav-item .nav-link:hover {
-            color: #adb5bd;
-        }
+            .custom-header .nav-item .nav-link:hover {
+                color: #adb5bd;
+            }
 
         .custom-header .form-inline {
             display: flex;
@@ -66,12 +66,12 @@
             padding: 0;
         }
 
-        .custom-header .btn i {
-            font-size: 18px;
-            color: white;
-            background-color: #C43240;
-            padding: 8px 20px;
-        }
+            .custom-header .btn i {
+                font-size: 18px;
+                color: white;
+                background-color: #C43240;
+                padding: 8px 20px;
+            }
 
         /* Điều chỉnh khoảng cách giữa các phần */
         .custom-header .navbar {
@@ -93,65 +93,18 @@
         <div class="top-bar">
             <div class="container d-flex justify-content-end">
                 <ul class="navbar-nav flex-row">
-                    @if (login == null)
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Home/Logout" style="font-size: 13px">Đăng ký</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Home/Login" style="font-size: 13px">Đăng nhập</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="nav-item">
-                            <span class="nav-link">@login</span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Home/DangXuat">Đăng Xuất</a>
-                        </li>
-                    }
+                    <li class="nav-item">
+                        <span class="nav-link" id="user-info" style="font-size: 13px"></span>
+                    </li>
+                    <li class="nav-item" id="logout-item" style="display:none;">
+                        <a class="nav-link" href="javascript:void(0);" onclick="logout()" style="font-size: 13px">Đăng Xuất</a>
+                    </li>
+                    <li class="nav-item" id="login-item">
+                        <a class="nav-link" href="/Home/Login" style="font-size: 13px">Đăng nhập</a>
+                    </li>
                 </ul>
             </div>
         </div>
-
-        <!-- Navbar section -->
-        <nav class="navbar navbar-expand-lg" style="background-color: #C43240">
-            <div class="container">
-                <div class="col-2">
-                    <a class="navbar-brand" href="/Home/Home">
-                        <img src="~/Content/images/logo/logoclipit.png" style="width: 80%" height="80" />
-                    </a>
-                </div>
-                <div class="col-4">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mm m-2">
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="/Home/Home">Trang chủ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Home/Contacts">Liên hệ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Home/Introduce">Giới thiệu</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Search bar aligned with navbar -->
-                <div class="col-md-6">
-                    <form class="form-inline" method="post" action="ProductList.php">
-                        <div class="form-group">
-                            <input type="text" name="txt_search" placeholder="Tìm kiếm..." class="form-control">
-                            <button type="submit" class="btn btn-default">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </nav>
     </div>
 </body>
 </html>

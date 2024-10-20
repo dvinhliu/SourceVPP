@@ -33,7 +33,7 @@
       <PropertyRef Name="MaGioHang" />
     </Key>
     <Property Name="MaGioHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MaTaiKhoan" Type="int" />
+    <Property Name="MaTaiKhoan" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="hang">
     <Key>
@@ -48,7 +48,7 @@
       <PropertyRef Name="MaHoaDon" />
     </Key>
     <Property Name="MaHoaDon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MaTaiKhoan" Type="int" />
+    <Property Name="MaTaiKhoan" Type="nvarchar" MaxLength="255" />
     <Property Name="NgayMua" Type="date" />
     <Property Name="DiaChi" Type="nvarchar" MaxLength="255" />
     <Property Name="SDT" Type="nvarchar" MaxLength="10" />
@@ -76,14 +76,24 @@
     <Property Name="SoLuong" Type="int" />
     <Property Name="MaHang" Type="int" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="users">
     <Key>
       <PropertyRef Name="MaTaiKhoan" />
     </Key>
-    <Property Name="MaTaiKhoan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TenKhachHang" Type="nvarchar" MaxLength="255" />
-    <Property Name="TenTaiKhoan" Type="nvarchar" MaxLength="255" />
-    <Property Name="MatKhau" Type="nvarchar" MaxLength="255" />
+    <Property Name="MaTaiKhoan" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="TenKhachHang" Type="nvarchar(max)" />
+    <Property Name="TenTaiKhoan" Type="nvarchar(max)" />
+    <Property Name="MatKhau" Type="nvarchar(max)" />
     <Property Name="Email" Type="nvarchar(max)" />
   </EntityType>
   <Association Name="FK__chitietgi__MaGio__49C3F6B7">
@@ -134,30 +144,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__giohang__MaTaiKh__46E78A0C">
-    <End Role="users" Type="Self.users" Multiplicity="0..1" />
-    <End Role="giohang" Type="Self.giohang" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="users">
-        <PropertyRef Name="MaTaiKhoan" />
-      </Principal>
-      <Dependent Role="giohang">
-        <PropertyRef Name="MaTaiKhoan" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__hoadon__MaTaiKho__403A8C7D">
-    <End Role="users" Type="Self.users" Multiplicity="0..1" />
-    <End Role="hoadon" Type="Self.hoadon" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="users">
-        <PropertyRef Name="MaTaiKhoan" />
-      </Principal>
-      <Dependent Role="hoadon">
-        <PropertyRef Name="MaTaiKhoan" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__sanpham__MaHang__3D5E1FD2">
     <End Role="hang" Type="Self.hang" Multiplicity="0..1" />
     <End Role="sanpham" Type="Self.sanpham" Multiplicity="*" />
@@ -170,6 +156,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_giohang_users">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="giohang" Type="Self.giohang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Principal>
+      <Dependent Role="giohang">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hoadon_users">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="hoadon" Type="Self.hoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Principal>
+      <Dependent Role="hoadon">
+        <PropertyRef Name="MaTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="laptopModelStoreContainer">
     <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="chitietgiohang" EntityType="Self.chitietgiohang" Schema="dbo" store:Type="Tables" />
@@ -178,6 +188,7 @@
     <EntitySet Name="hang" EntityType="Self.hang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="hoadon" EntityType="Self.hoadon" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sanpham" EntityType="Self.sanpham" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__chitietgi__MaGio__49C3F6B7" Association="Self.FK__chitietgi__MaGio__49C3F6B7">
       <End Role="giohang" EntitySet="giohang" />
@@ -195,17 +206,17 @@
       <End Role="sanpham" EntitySet="sanpham" />
       <End Role="chitiethoadon" EntitySet="chitiethoadon" />
     </AssociationSet>
-    <AssociationSet Name="FK__giohang__MaTaiKh__46E78A0C" Association="Self.FK__giohang__MaTaiKh__46E78A0C">
-      <End Role="users" EntitySet="users" />
-      <End Role="giohang" EntitySet="giohang" />
-    </AssociationSet>
-    <AssociationSet Name="FK__hoadon__MaTaiKho__403A8C7D" Association="Self.FK__hoadon__MaTaiKho__403A8C7D">
-      <End Role="users" EntitySet="users" />
-      <End Role="hoadon" EntitySet="hoadon" />
-    </AssociationSet>
     <AssociationSet Name="FK__sanpham__MaHang__3D5E1FD2" Association="Self.FK__sanpham__MaHang__3D5E1FD2">
       <End Role="hang" EntitySet="hang" />
       <End Role="sanpham" EntitySet="sanpham" />
+    </AssociationSet>
+    <AssociationSet Name="FK_giohang_users" Association="Self.FK_giohang_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="giohang" EntitySet="giohang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hoadon_users" Association="Self.FK_hoadon_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="hoadon" EntitySet="hoadon" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -68,3 +68,5 @@ D:\BackupData\DACN\SourceVPP\SourceVPP\bin\System.ValueTuple.xml
 D:\BackupData\DACN\SourceVPP\SourceVPP\obj\Debug\SourceVPP.csproj.CoreCompileInputs.cache
 D:\BackupData\DACN\SourceVPP\SourceVPP\obj\Debug\SourceVPP.csproj.CopyComplete
 D:\BackupData\DACN\SourceVPP\SourceVPP\obj\Debug\SourceVPP.csproj.AssemblyReference.cache
+D:\BackupData\DACN\SourceVPP\SourceVPP\bin\Firebase.Auth.dll
+D:\BackupData\DACN\SourceVPP\SourceVPP\bin\Firebase.Auth.xml

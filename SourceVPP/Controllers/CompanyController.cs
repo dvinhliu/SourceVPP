@@ -10,18 +10,18 @@ namespace SourceVPP.Controllers
     public class CompanyController : Controller
     {
         // GET: Topic
-        laptopEntities db = new laptopEntities();
+        laptopDataContext db = new laptopDataContext();
 
         public ActionResult CompanyPartial()
         {
-            return PartialView(db.hang.ToList());
+            return PartialView(db.hangs.ToList());
         }
         public ActionResult LaptopByCompany(int mahang)
         {
-            var tmp = db.sanpham.Where(l => l.MaHang == mahang).OrderBy(l => l.GiaBan).ToList();
+            var tmp = db.sanphams.Where(l => l.MaHang == mahang).OrderBy(l => l.GiaBan).ToList();
             if (tmp.Count > 0)
             {
-                ViewBag.Company = db.hang.Single(h => h.MaHang == mahang).TenHang;
+                ViewBag.Company = db.hangs.Single(h => h.MaHang == mahang).TenHang;
                 return View(tmp);
             }
             ViewBag.kq = "Không có laptop nào để hiển thị";
