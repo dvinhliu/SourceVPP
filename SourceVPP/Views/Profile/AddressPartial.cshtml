@@ -1,0 +1,112 @@
+﻿<style>
+    .address-list {
+        margin-top: 20px;
+    }
+
+    .address-item {
+        border-bottom: 1px solid #E0E0E0;
+        padding: 15px 0;
+        margin-bottom: 15px;
+        position: relative; /* Thêm thuộc tính này */
+    }
+
+    .btn-outline-danger {
+        color: #ff0000;
+        border-color: #ff0000;
+    }
+
+        .btn-outline-danger:hover {
+            background-color: #ff0000;
+            color: #fff;
+        }
+
+    .btn-outline-secondary {
+        color: #6c757d;
+        border-color: #6c757d;
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .justify-content-between {
+        justify-content: space-between;
+    }
+
+    .align-items-center {
+        align-items: center;
+    }
+
+    .align-items-end {
+        align-items: flex-end;
+    }
+
+    .mr-2 {
+        margin-right: 8px;
+    }
+
+    .mb-2 {
+        margin-bottom: 8px;
+    }
+
+    .p-0 {
+        padding: 0;
+    }
+
+    .text-primary {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .text-primary:hover {
+            text-decoration: underline;
+        }
+
+    .button-group {
+        display: flex;
+        flex-direction: column; /* Đặt các nút theo cột */
+        align-items: flex-end; /* Căn phải */
+        position: absolute; /* Thêm thuộc tính này */
+        right: 0; /* Đặt vị trí sang bên phải */
+        top: 50%; /* Đặt vị trí giữa */
+        transform: translateY(-50%); /* Căn giữa theo chiều dọc */
+    }
+
+        .button-group a {
+            margin-bottom: 5px; /* Khoảng cách giữa các nút */
+        }
+</style>
+
+<div class="d-flex justify-content-between align-items-center">
+    <p style="font-size: 20px; font-weight: bold; margin: 0;">Địa chỉ của tôi</p>
+    <button class="btn btn-danger">+ Thêm địa chỉ mới</button>
+</div>
+<hr />
+
+<div class="address-list">
+    <div class="address-item">
+        <p style="font-weight: bold; display: inline;">Hoàng Gia</p>
+        <span style="color: #888;">(+84) 903 320 156</span>
+        <p>21 Phan Văn Trị<br>Phường 14, Quận Bình Thạnh, TP. Hồ Chí Minh</p>
+
+        <div class="d-flex justify-content-between">
+            <div>
+                <button class="btn btn-outline-danger btn-sm mr-2">Mặc định</button>
+                <button class="btn btn-outline-secondary btn-sm">Địa chỉ lấy hàng</button>
+            </div>
+            <div class="button-group">
+                <!-- Khối chứa nút được căn giữa -->
+                <div>
+                    <a href="#" class="btn btn-link text-primary p-0 mr-2">Cập nhật</a>
+                    <a href="#" class="btn btn-link text-primary p-0 mr-2">Xóa</a>
+                </div>
+                <button class="btn btn-light btn-sm">Thiết lập mặc định</button>
+            </div>
+        </div>
+    </div>
+</div>

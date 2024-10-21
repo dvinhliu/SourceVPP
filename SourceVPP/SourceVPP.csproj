@@ -176,6 +176,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\carousel.css" />
+    <Content Include="Content\css\pofile.css" />
     <Content Include="Content\images\logo\Anh1.png" />
     <Content Include="Content\images\logo\Anh2.png" />
     <Content Include="Content\images\logo\Anh3.png" />
@@ -311,6 +312,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -381,6 +383,11 @@
     <Content Include="Views\Home\SignUp.cshtml" />
     <Content Include="Views\Home\ForgotPassword.cshtml" />
     <Content Include="Views\Home\ResetPassword.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\ProfilePartial.cshtml" />
+    <Content Include="Views\Profile\AddressPartial.cshtml" />
+    <Content Include="Views\Profile\ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Profile\OrderPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,5 +1,7 @@
-﻿function fetchUserData() {
-    const token = localStorage.getItem('token');
+﻿const apiKey = "AIzaSyC7PsMUUTQancVCjMl0NnbDVDl0tpWdZDY";
+
+function fetchUserData() {
+    const token = localStorage.getItem('token'); // Giữ token trong localStorage
     if (!token) return; // Không làm gì nếu không có token
 
     fetch('/User/GetUser', {
@@ -16,14 +18,17 @@
         })
         .then(data => {
             if (data.success) {
-                localStorage.setItem('user', JSON.stringify(data.user));
+                sessionStorage.setItem('user', JSON.stringify(data.user)); // Lưu thông tin người dùng vào sessionStorage
                 displayUserName();
-            }
-            else {
+            } else {
+                logout();
                 console.log("Lỗi:", data.message);
             }
         })
-        .catch(error => console.error('Có lỗi xảy ra:', error));
+        .catch(error => {
+            console.error('Có lỗi xảy ra:', error);
+            logout();
+        });
 }
 
 function refreshToken() {
@@ -51,7 +56,7 @@ function refreshToken() {
 }
 
 function displayUserName() {
-    const userData = localStorage.getItem('user');
+    const userData = sessionStorage.getItem('user');
     const userInfoElement = document.getElementById('user-info');
     const logoutItem = document.getElementById('logout-item');
     const loginItem = document.getElementById('login-item');
@@ -70,11 +75,10 @@ function displayUserName() {
 
 function logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    window.location.reload();
+    sessionStorage.removeItem('user');
+    window.location.replace('/Home/Home');
 }
 
-const apiKey = "AIzaSyC7PsMUUTQancVCjMl0NnbDVDl0tpWdZDY";
 
 async function signUp(email, password, tenkhachhang, tentaikhoan, gender, dateofbirth) {
     const apiUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`;
@@ -221,9 +225,20 @@ async function SignWithPassword(email, password) {
 
         const result = await response.json();
 
+        const errorImage = document.createElement('img');
+        errorImage.src = "/Content/images/logo/icons8-error-100.png";
+        errorImage.width = 30;
+        errorImage.height = 30;
+        errorImage.alt = "Error";
+        errorImage.style.verticalAlign = "middle";
+        errorImage.style.marginRight = "12px";
+
+        const notification = document.getElementById('notificationLogin');
+
         if (result.idToken) {
-            document.getElementById('notificationLogin').style.display = 'none';
+            notification.style.display = 'none';
             const checkemail = await CheckVerifiedEmail(result.idToken);
+
             if (checkemail) {
                 document.getElementById('notificationLogin').style.display = 'none';
 
@@ -241,25 +256,66 @@ async function SignWithPassword(email, password) {
                 const result2 = await check.json();
 
                 if (result2.success && result2.message === "Người dùng không tìm thấy.") {
-                    document.getElementById('notificationLogin').innerText = "Tên tài khoản của bạn hoặc Mật khẩu không đúng, vui lòng thử lại";
-                    document.getElementById('notificationLogin').style.display = 'block';
+                    notification.innerHTML = '';
+
+                    const messageContainer = document.createElement('div');
+                    messageContainer.style.display = 'flex';
+                    messageContainer.style.alignItems = 'center';
+
+
+                    messageContainer.appendChild(errorImage); // Thêm hình ảnh
+                    messageContainer.appendChild(document.createTextNode(" Tên tài khoản của bạn hoặc Mật khẩu không đúng, vui lòng thử lại")); // Thêm văn bản
+
+
+                    notification.appendChild(messageContainer); // Thêm cả hai vào phần thông báo
+
+
+                    notification.style.display = 'block';
                     return false;
                 }
                 else {
-                    document.getElementById('notificationLogin').style.display = 'none';
+                    notification.style.display = 'none';
                     return true;
                 }
             }
             else {
                 console.error("Chưa xác thực email");
-                document.getElementById('notificationLogin').innerText = "Chưa xác thực email. Vui lòng xác thực email!";
-                document.getElementById('notificationLogin').style.display = 'block';
+
+                notification.innerHTML = '';
+
+                const messageContainer = document.createElement('div');
+                messageContainer.style.display = 'flex';
+                messageContainer.style.alignItems = 'center';
+
+
+                messageContainer.appendChild(errorImage);
+                messageContainer.appendChild(document.createTextNode(" Chưa xác thực email. Vui lòng xác thực email!"));
+
+
+                notification.appendChild(messageContainer);
+
+
+                notification.style.display = 'block';
             }
         }
         else {
             console.error("Có lỗi khi lấy dữ liệu signWithPass:", result.message);
-            document.getElementById('notificationLogin').innerText = "Tên tài khoản của bạn hoặc Mật khẩu không đúng, vui lòng thử lại";
-            document.getElementById('notificationLogin').style.display = 'block';
+
+            notification.innerHTML = '';
+
+            const messageContainer = document.createElement('div');
+            messageContainer.style.display = 'flex';
+            messageContainer.style.alignItems = 'center';
+
+
+            messageContainer.appendChild(errorImage);
+            messageContainer.appendChild(document.createTextNode(" Tên tài khoản của bạn hoặc Mật khẩu không đúng, vui lòng thử lại"));
+
+
+            notification.appendChild(messageContainer);
+
+
+            notification.style.display = 'block';
         }
     }
     catch (error) {
@@ -356,6 +412,7 @@ async function checkEmailResetPassword(email) {
 
         const result = await response.json();
         console.log(result);
+
         return result.exists;
     } catch (error) {
         console.error("Có lỗi xảy ra khi kiểm tra email reset password:", error);

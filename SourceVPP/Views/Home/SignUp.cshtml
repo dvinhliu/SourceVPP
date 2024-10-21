@@ -50,19 +50,6 @@
     </style>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyC7PsMUUTQancVCjMl0NnbDVDl0tpWdZDY",
-            authDomain: "ecommercevpp.firebaseapp.com",
-            projectId: "ecommercevpp",
-            storageBucket: "ecommercevpp.appspot.com",
-            messagingSenderId: "867737625124",
-            appId: "1:867737625124:web:b7df5e4e371340b3ce2eb1"
-        };
-
-        // Khởi tạo Firebase
-        firebase.initializeApp(firebaseConfig);
-    </script>
     <script src="~/Content/js/User.js"></script>
 </head>
 <body>
@@ -110,11 +97,6 @@
                                     <div class="col-12">
                                         <!-- Thông báo xác thực email -->
                                         <div class="alert alert-success" id="emailVerificationMessage" style="display: none;">
-                                            <svg viewBox="0 0 16 16" class="vfeSp5">
-                                                <path fill="none" stroke="#FF424F" d="M8 15A7 7 0 108 1a7 7 0 000 14z" clip-rule="evenodd"></path>
-                                                <rect stroke="none" width="7" height="1.5" x="6.061" y="5" fill="#FF424F" rx=".75" transform="rotate(45 6.06 5)"></rect>
-                                                <rect stroke="none" width="7" height="1.5" fill="#FF424F" rx=".75" transform="scale(-1 1) rotate(45 -11.01 -9.51)"></rect>
-                                            </svg>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -237,8 +219,17 @@
                 password.classList.add("is-invalid");
                 isValid = false;
             }
+            else if (password.value.length < 6) {
+                password.classList.add("is-invalid");
+                const passwordFeedback = password.parentElement.querySelector('.invalid-feedback');
+                passwordFeedback.innerText = "Mật khẩu phải có ít nhất 6 ký tự.";
+                passwordFeedback.style.display = 'block';
+                isValid = false;
+            }
             else {
                 password.classList.remove("is-invalid");
+                const passwordFeedback = password.parentElement.querySelector('.invalid-feedback');
+                passwordFeedback.style.display = 'none';
             }
 
             if (cfpassword.value.trim() === "" || cfpassword.value !== password.value) {

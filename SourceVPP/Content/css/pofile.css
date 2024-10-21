@@ -1,0 +1,12 @@
+﻿.list-group-item.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.list-group-item.sub-item {
+    padding-left: 30px; /* Add some indent to sub-items */
+}
+
+.list-group-item.active i {
+    color: white;
+}

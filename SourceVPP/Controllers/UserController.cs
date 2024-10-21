@@ -60,6 +60,20 @@ namespace SourceVPP.Controllers
             return Json(new { exists = emailExists }, JsonRequestBehavior.AllowGet);
         }
 
+        [System.Web.Http.HttpPost]
+        public async Task<ActionResult> CheckEmailVerified(string email)
+        {
+            try
+            {
+                var userRecord = await FirebaseAuth.DefaultInstance.GetUserByEmailAsync(email);
+                return Json(new { emailVerified = userRecord.EmailVerified });
+            }
+            catch (FirebaseAuthException ex)
+            {
+                return Json(new { error = ex.Message });
+            }
+        }
+
         // POST: User/RefreshToken
         [System.Web.Http.HttpPost]
         public async Task<ActionResult> RefreshToken([FromBody] TokenRequest request)
