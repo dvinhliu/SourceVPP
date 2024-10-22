@@ -87,5 +87,28 @@ namespace SourceVPP.Controllers
 
             return PartialView();
         }
+
+        [HttpPost]
+        public ActionResult UpdateProfile(user updateUser)
+        {
+            try
+            {
+                var currentUser = db.users.FirstOrDefault(u => u.MaTaiKhoan == updateUser.MaTaiKhoan);
+                if (currentUser != null)
+                {
+                    currentUser.TenKhachHang = updateUser.TenKhachHang;
+                    currentUser.Gender = updateUser.Gender;
+                    currentUser.DateOfBirth = updateUser.DateOfBirth;
+                    currentUser.ImageProfile = updateUser.ImageProfile;
+
+                    db.SubmitChanges();
+                }
+                return RedirectToAction("Index", new { view = "ProfilePartial", MaTaiKhoan = updateUser.MaTaiKhoan });
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new { message = ex.Message });
+            }
+        }
     }
 }

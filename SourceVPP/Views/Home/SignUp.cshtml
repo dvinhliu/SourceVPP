@@ -243,7 +243,16 @@
             if (dob.value.trim() === "") {
                 dob.classList.add("is-invalid");
                 isValid = false;
-            } else {
+            }
+            else if (!isOver16(dob.value))
+            {
+                dob.classList.add("is-invalid");
+                const dobFeedback = dob.parentElement.querySelector('.invalid-feedback');
+                dobFeedback.innerText = "Bạn phải đủ 16 tuổi để đăng ký.";
+                dobFeedback.style.display = 'block';
+                isValid = false;
+            }
+            else {
                 dob.classList.remove("is-invalid");
             }
 

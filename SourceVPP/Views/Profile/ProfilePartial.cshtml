@@ -6,7 +6,10 @@
 
 <div class="row">
     <div class="col-md-8">
-        <form id="profile-form">
+        <form id="profile-form" method="post" action="@Url.Action("UpdateProfile", "Profile")">
+            <!-- Hidden input to pass MaTaiKhoan -->
+            <input type="hidden" name="MaTaiKhoan" value="@Model.MaTaiKhoan" />
+
             <div class="form-group row mb-3">
                 <label class="col-sm-3 col-form-label">Tên đăng nhập</label>
                 <div class="col-sm-9">
@@ -17,7 +20,7 @@
             <div class="form-group row mb-3">
                 <label class="col-sm-3 col-form-label">Tên</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" value="@Model.TenKhachHang" />
+                    <input type="text" class="form-control" name="TenKhachHang" value="@Model.TenKhachHang" />
                 </div>
             </div>
 
@@ -32,15 +35,15 @@
                 <label class="col-sm-3 col-form-label">Giới tính</label>
                 <div class="col-sm-9 d-flex align-items-center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" value="Nam" @(Model.Gender == "Nam" ? "checked" : "")>
+                        <input class="form-check-input" type="radio" name="Gender" value="Nam" @(Model.Gender == "Nam" ? "checked" : "")>
                         <label class="form-check-label">Nam</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" value="Nữ" @(Model.Gender == "Nữ" ? "checked" : "")>
+                        <input class="form-check-input" type="radio" name="Gender" value="Nữ" @(Model.Gender == "Nữ" ? "checked" : "")>
                         <label class="form-check-label">Nữ</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" value="Khác" @(Model.Gender == "Khác" ? "checked" : "")>
+                        <input class="form-check-input" type="radio" name="Gender" value="Khác" @(Model.Gender == "Khác" ? "checked" : "")>
                         <label class="form-check-label">Khác</label>
                     </div>
                 </div>
@@ -59,7 +62,7 @@
                             <span class="input-group-text">
                                 <i class="bi bi-calendar"></i>
                             </span>
-                            <input type="date" class="form-control" name="dob" id="dob" value="@(Model.DateOfBirth != null ? Model.DateOfBirth.Value.ToString("yyyy-MM-dd") : "")" />
+                            <input type="date" class="form-control" name="DateOfBirth" id="dob" value="@(Model.DateOfBirth != null ? Model.DateOfBirth.Value.ToString("yyyy-MM-dd") : "")" />
                         </div>
                     </div>
                 </div>

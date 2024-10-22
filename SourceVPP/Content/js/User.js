@@ -55,6 +55,15 @@ function refreshToken() {
         });
 }
 
+function isOver16(dateString) {
+    const today = new Date();
+    const birthDate = new Date(dateString);
+    const birthYear = birthDate.getFullYear();
+    const currentYear = today.getFullYear();
+
+    return (currentYear - birthYear) >= 16;
+}
+
 function displayUserName() {
     const userData = sessionStorage.getItem('user');
     const userInfoElement = document.getElementById('user-info');
