@@ -1,51 +1,46 @@
-﻿<p style="font-size: 20px; font-weight: bold;">Hồ Sơ Của Tôi</p>
+﻿@model SourceVPP.Models.user
+
+<p style="font-size: 20px; font-weight: bold;">Hồ Sơ Của Tôi</p>
 <p style="font-size: 15px;">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
 <hr />
 
 <div class="row">
     <div class="col-md-8">
-        <form>
+        <form id="profile-form">
             <div class="form-group row mb-3">
                 <label class="col-sm-3 col-form-label">Tên đăng nhập</label>
                 <div class="col-sm-9">
-                    <p class="form-control-plaintext">ducvinhliu</p>
+                    <p class="form-control-plaintext">@Model.TenTaiKhoan</p>
                 </div>
             </div>
 
             <div class="form-group row mb-3">
                 <label class="col-sm-3 col-form-label">Tên</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" value="Dương Gia" />
+                    <input type="text" class="form-control" value="@Model.TenKhachHang" />
                 </div>
             </div>
 
             <div class="form-group row mb-3">
                 <label class="col-sm-3 col-form-label">Email</label>
                 <div class="col-sm-9">
-                    <p class="form-control-plaintext">hu********gmail.com <a href="#">Thay Đổi</a></p>
-                </div>
-            </div>
-
-            <div class="form-group row mb-3">
-                <label class="col-sm-3 col-form-label">Số điện thoại</label>
-                <div class="col-sm-9">
-                    <p class="form-control-plaintext">********56 <a href="#">Thay Đổi</a></p>
+                    <p class="form-control-plaintext">@Model.Email <a href="#">Thay Đổi</a></p>
                 </div>
             </div>
 
             <div class="form-group row mb-3">
                 <label class="col-sm-3 col-form-label">Giới tính</label>
-                <div class="col-sm-9">
+                <div class="col-sm-9 d-flex align-items-center">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" value="Nam" checked>
+                        <input class="form-check-input" type="radio" name="gender" value="Nam" @(Model.Gender == "Nam" ? "checked" : "")>
                         <label class="form-check-label">Nam</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" value="Nữ">
+                        <input class="form-check-input" type="radio" name="gender" value="Nữ" @(Model.Gender == "Nữ" ? "checked" : "")>
                         <label class="form-check-label">Nữ</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" value="Khác">
+                        <input class="form-check-input" type="radio" name="gender" value="Khác" @(Model.Gender == "Khác" ? "checked" : "")>
                         <label class="form-check-label">Khác</label>
                     </div>
                 </div>
@@ -54,7 +49,19 @@
             <div class="form-group row mb-3">
                 <label class="col-sm-3 col-form-label">Ngày sinh</label>
                 <div class="col-sm-9">
-                    <p class="form-control-plaintext">**/07/20** <a href="#">Thay Đổi</a></p>
+                    <p id="display-dob" class="form-control-plaintext">
+                        @(Model.DateOfBirth == null ? "Chưa có dữ liệu" : Model.DateOfBirth.Value.ToString("dd/MM/yyyy"))
+                        <a href="javascript:void(0);" id="change-dob">Thay Đổi</a>
+                    </p>
+
+                    <div id="edit-dob" style="display: none;">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-calendar"></i>
+                            </span>
+                            <input type="date" class="form-control" name="dob" id="dob" value="@(Model.DateOfBirth != null ? Model.DateOfBirth.Value.ToString("yyyy-MM-dd") : "")" />
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -68,8 +75,22 @@
 
     <!-- Profile Image Section -->
     <div class="col-md-4 d-flex flex-column align-items-center text-center">
-        <img src="~/Content/images/logo/fahasa-logo.png" class="rounded-circle" alt="Profile Image" style="width: 150px; height: 150px;">
+        @if (Model.ImageProfile == null)
+        {
+            <img src="~/Content/images/logo/icons8-male-user-100.png" class="rounded-circle" alt="Profile Image" style="width: 100px; height: 100px;">
+        }
+        else
+        {
+            <img src="@Model.ImageProfile" class="rounded-circle" alt="Profile Image" style="width: 100px; height: 100px;">
+        }
         <button class="btn btn-light mt-3">Chọn Ảnh</button>
         <p class="text-muted">Dung lượng file tối đa 1 MB<br>Định dạng: JPEG, PNG</p>
     </div>
 </div>
+
+<script>
+    document.getElementById('change-dob').addEventListener('click', function () {
+        document.getElementById('display-dob').style.display = 'none';
+        document.getElementById('edit-dob').style.display = 'block';
+    });
+</script>

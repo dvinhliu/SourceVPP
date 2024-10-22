@@ -63,11 +63,12 @@ function displayUserName() {
 
     if (userData) {
         const user = JSON.parse(userData);
-        userInfoElement.innerHTML = user.TenTaiKhoan;
+        // Tạo liên kết cho tên người dùng
+        userInfoElement.innerHTML = `<a href="/Profile/Index?MaTaiKhoan=${encodeURIComponent(user.MaTaiKhoan)}" style="color: white; text-decoration: none">${user.TenTaiKhoan}</a>`;
         logoutItem.style.display = 'inline';
         loginItem.style.display = 'none';
     } else {
-        userInfoElement.innerHTML = '';
+        userInfoElement.innerHTML = ''; // Đặt lại nếu không có người dùng
         logoutItem.style.display = 'none';
         loginItem.style.display = 'inline';
     }

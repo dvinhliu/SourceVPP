@@ -55,7 +55,6 @@ namespace SourceVPP.Controllers
                 string email = decodedToken.Claims["email"].ToString();
                 string displayName = decodedToken.Claims["name"].ToString();
                 string userName = email.Substring(0, email.IndexOf('@'));
-                string photoUrl = decodedToken.Claims.ContainsKey("picture") ? decodedToken.Claims["picture"].ToString() : null;
                 // Kiểm tra hoặc tạo người dùng mới dựa trên email
                 var user = db.users.SingleOrDefault(u => u.Email == email);
                 if (user == null)
@@ -65,8 +64,7 @@ namespace SourceVPP.Controllers
                         MaTaiKhoan = uid,
                         Email = email,
                         TenKhachHang = displayName,
-                        TenTaiKhoan = userName,
-                        ImageProfile = photoUrl
+                        TenTaiKhoan = userName
                     };
                     db.users.InsertOnSubmit(user);
                     db.SubmitChanges();

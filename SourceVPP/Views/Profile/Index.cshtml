@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SourceVPP.Models.user
+
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
@@ -12,13 +14,20 @@
             <div class="list-group mb-5">
                 <!-- Profile Section -->
                 <div class="text-center py-3">
-                    <img src="~/Content/images/logo/fahasa-logo.png" class="rounded-circle" alt="Profile Image" style="width: 100px; height: 100px;">
+                    @if (Model.ImageProfile == null)
+                    {
+                        <img src="~/Content/images/logo/icons8-male-user-100.png" class="rounded-circle" alt="Profile Image" style="width: 100px; height: 100px;">
+                    }
+                    else
+                    {
+                        <img src="@Model.ImageProfile" class="rounded-circle" alt="Profile Image" style="width: 100px; height: 100px;">
+                    }
                     <h5 class="mt-2">vnhyt964</h5>
-                    <a href="@Url.Action("Index", "Profile", new { view = "ProfilePartial" })" class="text-secondary">Sửa Hồ Sơ</a>
+                    <a href="@Url.Action("Index", "Profile", new { MaTaiKhoan = ViewBag.MaTaiKhoan, view = "ProfilePartial" })" class="text-secondary">Sửa Hồ Sơ</a>
                 </div>
 
                 <!-- Sidebar Menu Items -->
-                <a href="@Url.Action("Index", "Profile", new { view = "ProfilePartial" })" class="list-group-item account-item @(ViewBag.PartialView == "ProfilePartial" || ViewBag.PartialView == "AddressPartial" || ViewBag.PartialView == "ChangePasswordPartial" ? "active" : "")">
+                <a href="@Url.Action("Index", "Profile", new { MaTaiKhoan = ViewBag.MaTaiKhoan, view = "ProfilePartial" })" class="list-group-item account-item @(ViewBag.PartialView == "ProfilePartial" || ViewBag.PartialView == "AddressPartial" || ViewBag.PartialView == "ChangePasswordPartial" ? "active" : "")">
                     <i class="fas fa-user"></i> Tài Khoản Của Tôi
                 </a>
 
@@ -26,13 +35,13 @@
                 @if (ViewBag.PartialView != "OrderPartial")
                 {
                     <div class="sub-menu">
-                        <a href="@Url.Action("Index", "Profile", new { view = "ProfilePartial" })" class="list-group-item sub-item @(ViewBag.PartialView == "ProfilePartial" ? "active" : "")">
+                        <a href="@Url.Action("Index", "Profile", new { MaTaiKhoan = ViewBag.MaTaiKhoan, view = "ProfilePartial" })" class="list-group-item sub-item @(ViewBag.PartialView == "ProfilePartial" ? "active" : "")">
                             <i class="fas fa-address-card"></i> Hồ Sơ
                         </a>
-                        <a href="@Url.Action("Index", "Profile", new { view = "AddressPartial" })" class="list-group-item sub-item @(ViewBag.PartialView == "AddressPartial" ? "active" : "")">
+                        <a href="@Url.Action("Index", "Profile", new { MaTaiKhoan = ViewBag.MaTaiKhoan, view = "AddressPartial" })" class="list-group-item sub-item @(ViewBag.PartialView == "AddressPartial" ? "active" : "")">
                             <i class="fas fa-map-marker-alt"></i> Địa Chỉ
                         </a>
-                        <a href="@Url.Action("Index", "Profile", new { view = "ChangePasswordPartial" })" class="list-group-item sub-item @(ViewBag.PartialView == "ChangePasswordPartial" ? "active" : "")">
+                        <a href="@Url.Action("Index", "Profile", new { MaTaiKhoan = ViewBag.MaTaiKhoan, view = "ChangePasswordPartial" })" class="list-group-item sub-item @(ViewBag.PartialView == "ChangePasswordPartial" ? "active" : "")">
                             <i class="fas fa-key"></i> Đổi Mật Khẩu
                         </a>
                     </div>
@@ -42,7 +51,7 @@
                 <hr>
 
                 <!-- Additional Menu Items -->
-                <a href="@Url.Action("Index", "Profile", new { view = "OrderPartial" })" class="list-group-item @(ViewBag.PartialView == "OrderPartial" ? "active" : "")">
+                <a href="@Url.Action("Index", "Profile", new { MaTaiKhoan = ViewBag.MaTaiKhoan, view = "OrderPartial" })" class="list-group-item @(ViewBag.PartialView == "OrderPartial" ? "active" : "")">
                     <i class="fas fa-shopping-bag"></i> Đơn Mua
                 </a>
             </div>
@@ -52,19 +61,19 @@
         <div class="col-md-10 p-4">
             @if (ViewBag.PartialView == "ProfilePartial")
             {
-                @Html.Action("ProfilePartial", "Profile")
+                @Html.Action("ProfilePartial", "Profile", new { MaTaiKhoan = ViewBag.MaTaiKhoan })
             }
             else if (ViewBag.PartialView == "AddressPartial")
             {
-                @Html.Action("AddressPartial", "Profile")
+                @Html.Action("AddressPartial", "Profile", new { MaTaiKhoan = ViewBag.MaTaiKhoan })
             }
             else if (ViewBag.PartialView == "ChangePasswordPartial")
             {
-                @Html.Action("ChangePasswordPartial", "Profile")
+                @Html.Action("ChangePasswordPartial", "Profile", new { MaTaiKhoan = ViewBag.MaTaiKhoan })
             }
             else if (ViewBag.PartialView == "OrderPartial")
             {
-                @Html.Action("OrderPartial", "Profile")
+                @Html.Action("OrderPartial", "Profile", new { MaTaiKhoan = ViewBag.MaTaiKhoan })
             }
         </div>
     </div>
