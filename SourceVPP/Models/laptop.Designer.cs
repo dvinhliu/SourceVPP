@@ -30,12 +30,15 @@ namespace SourceVPP.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Insertadmin(admin instance);
-    partial void Updateadmin(admin instance);
-    partial void Deleteadmin(admin instance);
+    partial void Insertaddress(address instance);
+    partial void Updateaddress(address instance);
+    partial void Deleteaddress(address instance);
     partial void Insertuser(user instance);
     partial void Updateuser(user instance);
     partial void Deleteuser(user instance);
+    partial void Insertadmin(admin instance);
+    partial void Updateadmin(admin instance);
+    partial void Deleteadmin(admin instance);
     partial void Insertchitietgiohang(chitietgiohang instance);
     partial void Updatechitietgiohang(chitietgiohang instance);
     partial void Deletechitietgiohang(chitietgiohang instance);
@@ -86,11 +89,11 @@ namespace SourceVPP.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<admin> admins
+		public System.Data.Linq.Table<address> addresses
 		{
 			get
 			{
-				return this.GetTable<admin>();
+				return this.GetTable<address>();
 			}
 		}
 		
@@ -99,6 +102,14 @@ namespace SourceVPP.Models
 			get
 			{
 				return this.GetTable<user>();
+			}
+		}
+		
+		public System.Data.Linq.Table<admin> admins
+		{
+			get
+			{
+				return this.GetTable<admin>();
 			}
 		}
 		
@@ -151,37 +162,84 @@ namespace SourceVPP.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.admin")]
-	public partial class admin : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.addresses")]
+	public partial class address : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _MaTaiKhoan;
+		private int _address_id;
 		
-		private string _TenTaiKhoan;
+		private string _MaTaiKhoan;
 		
-		private string _MatKhau;
+		private string _full_name;
+		
+		private string _phone_number;
+		
+		private string _address_line;
+		
+		private string _ward;
+		
+		private int _district;
+		
+		private int _province;
+		
+		private System.Nullable<bool> _isDefault;
+		
+		private EntityRef<user> _user;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMaTaiKhoanChanging(int value);
+    partial void Onaddress_idChanging(int value);
+    partial void Onaddress_idChanged();
+    partial void OnMaTaiKhoanChanging(string value);
     partial void OnMaTaiKhoanChanged();
-    partial void OnTenTaiKhoanChanging(string value);
-    partial void OnTenTaiKhoanChanged();
-    partial void OnMatKhauChanging(string value);
-    partial void OnMatKhauChanged();
+    partial void Onfull_nameChanging(string value);
+    partial void Onfull_nameChanged();
+    partial void Onphone_numberChanging(string value);
+    partial void Onphone_numberChanged();
+    partial void Onaddress_lineChanging(string value);
+    partial void Onaddress_lineChanged();
+    partial void OnwardChanging(string value);
+    partial void OnwardChanged();
+    partial void OndistrictChanging(int value);
+    partial void OndistrictChanged();
+    partial void OnprovinceChanging(int value);
+    partial void OnprovinceChanged();
+    partial void OnisDefaultChanging(System.Nullable<bool> value);
+    partial void OnisDefaultChanged();
     #endregion
 		
-		public admin()
+		public address()
 		{
+			this._user = default(EntityRef<user>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaTaiKhoan", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MaTaiKhoan
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int address_id
+		{
+			get
+			{
+				return this._address_id;
+			}
+			set
+			{
+				if ((this._address_id != value))
+				{
+					this.Onaddress_idChanging(value);
+					this.SendPropertyChanging();
+					this._address_id = value;
+					this.SendPropertyChanged("address_id");
+					this.Onaddress_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaTaiKhoan", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string MaTaiKhoan
 		{
 			get
 			{
@@ -191,6 +249,10 @@ namespace SourceVPP.Models
 			{
 				if ((this._MaTaiKhoan != value))
 				{
+					if (this._user.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnMaTaiKhoanChanging(value);
 					this.SendPropertyChanging();
 					this._MaTaiKhoan = value;
@@ -200,42 +262,176 @@ namespace SourceVPP.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenTaiKhoan", DbType="NVarChar(255)")]
-		public string TenTaiKhoan
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_full_name", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string full_name
 		{
 			get
 			{
-				return this._TenTaiKhoan;
+				return this._full_name;
 			}
 			set
 			{
-				if ((this._TenTaiKhoan != value))
+				if ((this._full_name != value))
 				{
-					this.OnTenTaiKhoanChanging(value);
+					this.Onfull_nameChanging(value);
 					this.SendPropertyChanging();
-					this._TenTaiKhoan = value;
-					this.SendPropertyChanged("TenTaiKhoan");
-					this.OnTenTaiKhoanChanged();
+					this._full_name = value;
+					this.SendPropertyChanged("full_name");
+					this.Onfull_nameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MatKhau", DbType="NVarChar(255)")]
-		public string MatKhau
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone_number", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string phone_number
 		{
 			get
 			{
-				return this._MatKhau;
+				return this._phone_number;
 			}
 			set
 			{
-				if ((this._MatKhau != value))
+				if ((this._phone_number != value))
 				{
-					this.OnMatKhauChanging(value);
+					this.Onphone_numberChanging(value);
 					this.SendPropertyChanging();
-					this._MatKhau = value;
-					this.SendPropertyChanged("MatKhau");
-					this.OnMatKhauChanged();
+					this._phone_number = value;
+					this.SendPropertyChanged("phone_number");
+					this.Onphone_numberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address_line", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string address_line
+		{
+			get
+			{
+				return this._address_line;
+			}
+			set
+			{
+				if ((this._address_line != value))
+				{
+					this.Onaddress_lineChanging(value);
+					this.SendPropertyChanging();
+					this._address_line = value;
+					this.SendPropertyChanged("address_line");
+					this.Onaddress_lineChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ward", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ward
+		{
+			get
+			{
+				return this._ward;
+			}
+			set
+			{
+				if ((this._ward != value))
+				{
+					this.OnwardChanging(value);
+					this.SendPropertyChanging();
+					this._ward = value;
+					this.SendPropertyChanged("ward");
+					this.OnwardChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_district", DbType="Int NOT NULL")]
+		public int district
+		{
+			get
+			{
+				return this._district;
+			}
+			set
+			{
+				if ((this._district != value))
+				{
+					this.OndistrictChanging(value);
+					this.SendPropertyChanging();
+					this._district = value;
+					this.SendPropertyChanged("district");
+					this.OndistrictChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_province", DbType="Int NOT NULL")]
+		public int province
+		{
+			get
+			{
+				return this._province;
+			}
+			set
+			{
+				if ((this._province != value))
+				{
+					this.OnprovinceChanging(value);
+					this.SendPropertyChanging();
+					this._province = value;
+					this.SendPropertyChanged("province");
+					this.OnprovinceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isDefault", DbType="Bit")]
+		public System.Nullable<bool> isDefault
+		{
+			get
+			{
+				return this._isDefault;
+			}
+			set
+			{
+				if ((this._isDefault != value))
+				{
+					this.OnisDefaultChanging(value);
+					this.SendPropertyChanging();
+					this._isDefault = value;
+					this.SendPropertyChanged("isDefault");
+					this.OnisDefaultChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_address", Storage="_user", ThisKey="MaTaiKhoan", OtherKey="MaTaiKhoan", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public user user
+		{
+			get
+			{
+				return this._user.Entity;
+			}
+			set
+			{
+				user previousValue = this._user.Entity;
+				if (((previousValue != value) 
+							|| (this._user.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._user.Entity = null;
+						previousValue.addresses.Remove(this);
+					}
+					this._user.Entity = value;
+					if ((value != null))
+					{
+						value.addresses.Add(this);
+						this._MaTaiKhoan = value.MaTaiKhoan;
+					}
+					else
+					{
+						this._MaTaiKhoan = default(string);
+					}
+					this.SendPropertyChanged("user");
 				}
 			}
 		}
@@ -283,6 +479,10 @@ namespace SourceVPP.Models
 		
 		private string _MatKhauCap2;
 		
+		private string _PhoneNumber;
+		
+		private EntitySet<address> _addresses;
+		
 		private EntitySet<giohang> _giohangs;
 		
 		private EntitySet<hoadon> _hoadons;
@@ -307,10 +507,13 @@ namespace SourceVPP.Models
     partial void OnImageProfileChanged();
     partial void OnMatKhauCap2Changing(string value);
     partial void OnMatKhauCap2Changed();
+    partial void OnPhoneNumberChanging(string value);
+    partial void OnPhoneNumberChanged();
     #endregion
 		
 		public user()
 		{
+			this._addresses = new EntitySet<address>(new Action<address>(this.attach_addresses), new Action<address>(this.detach_addresses));
 			this._giohangs = new EntitySet<giohang>(new Action<giohang>(this.attach_giohangs), new Action<giohang>(this.detach_giohangs));
 			this._hoadons = new EntitySet<hoadon>(new Action<hoadon>(this.attach_hoadons), new Action<hoadon>(this.detach_hoadons));
 			OnCreated();
@@ -476,6 +679,39 @@ namespace SourceVPP.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(10)")]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this.OnPhoneNumberChanging(value);
+					this.SendPropertyChanging();
+					this._PhoneNumber = value;
+					this.SendPropertyChanged("PhoneNumber");
+					this.OnPhoneNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_address", Storage="_addresses", ThisKey="MaTaiKhoan", OtherKey="MaTaiKhoan")]
+		public EntitySet<address> addresses
+		{
+			get
+			{
+				return this._addresses;
+			}
+			set
+			{
+				this._addresses.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_giohang", Storage="_giohangs", ThisKey="MaTaiKhoan", OtherKey="MaTaiKhoan")]
 		public EntitySet<giohang> giohangs
 		{
@@ -522,6 +758,18 @@ namespace SourceVPP.Models
 			}
 		}
 		
+		private void attach_addresses(address entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = this;
+		}
+		
+		private void detach_addresses(address entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = null;
+		}
+		
 		private void attach_giohangs(giohang entity)
 		{
 			this.SendPropertyChanging();
@@ -544,6 +792,116 @@ namespace SourceVPP.Models
 		{
 			this.SendPropertyChanging();
 			entity.user = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.admin")]
+	public partial class admin : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _MaTaiKhoan;
+		
+		private string _TenTaiKhoan;
+		
+		private string _MatKhau;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMaTaiKhoanChanging(int value);
+    partial void OnMaTaiKhoanChanged();
+    partial void OnTenTaiKhoanChanging(string value);
+    partial void OnTenTaiKhoanChanged();
+    partial void OnMatKhauChanging(string value);
+    partial void OnMatKhauChanged();
+    #endregion
+		
+		public admin()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaTaiKhoan", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int MaTaiKhoan
+		{
+			get
+			{
+				return this._MaTaiKhoan;
+			}
+			set
+			{
+				if ((this._MaTaiKhoan != value))
+				{
+					this.OnMaTaiKhoanChanging(value);
+					this.SendPropertyChanging();
+					this._MaTaiKhoan = value;
+					this.SendPropertyChanged("MaTaiKhoan");
+					this.OnMaTaiKhoanChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenTaiKhoan", DbType="NVarChar(255)")]
+		public string TenTaiKhoan
+		{
+			get
+			{
+				return this._TenTaiKhoan;
+			}
+			set
+			{
+				if ((this._TenTaiKhoan != value))
+				{
+					this.OnTenTaiKhoanChanging(value);
+					this.SendPropertyChanging();
+					this._TenTaiKhoan = value;
+					this.SendPropertyChanged("TenTaiKhoan");
+					this.OnTenTaiKhoanChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MatKhau", DbType="NVarChar(255)")]
+		public string MatKhau
+		{
+			get
+			{
+				return this._MatKhau;
+			}
+			set
+			{
+				if ((this._MatKhau != value))
+				{
+					this.OnMatKhauChanging(value);
+					this.SendPropertyChanging();
+					this._MatKhau = value;
+					this.SendPropertyChanged("MatKhau");
+					this.OnMatKhauChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	

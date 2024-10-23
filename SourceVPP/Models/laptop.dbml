@@ -1,10 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="laptop" Class="laptopDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-NO8JHRO\VINHYET;Initial Catalog=laptop;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="laptopConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.admin" Member="admins">
-    <Type Name="admin">
-      <Column Name="MaTaiKhoan" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TenTaiKhoan" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="MatKhau" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+  <Table Name="dbo.addresses" Member="addresses">
+    <Type Name="address">
+      <Column Name="address_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MaTaiKhoan" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="full_name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="phone_number" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="address_line" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ward" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="district" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="province" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isDefault" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="user_address" Member="user" ThisKey="MaTaiKhoan" OtherKey="MaTaiKhoan" Type="user" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.users" Member="users">
@@ -17,8 +24,17 @@
       <Column Name="DateOfBirth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="ImageProfile" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="MatKhauCap2" Type="System.String" DbType="Char(6)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="user_address" Member="addresses" ThisKey="MaTaiKhoan" OtherKey="MaTaiKhoan" Type="address" />
       <Association Name="user_giohang" Member="giohangs" ThisKey="MaTaiKhoan" OtherKey="MaTaiKhoan" Type="giohang" />
       <Association Name="user_hoadon" Member="hoadons" ThisKey="MaTaiKhoan" OtherKey="MaTaiKhoan" Type="hoadon" />
+    </Type>
+  </Table>
+  <Table Name="dbo.admin" Member="admins">
+    <Type Name="admin">
+      <Column Name="MaTaiKhoan" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenTaiKhoan" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MatKhau" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.chitietgiohang" Member="chitietgiohangs">

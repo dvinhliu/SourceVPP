@@ -69,15 +69,35 @@ function displayUserName() {
     const userInfoElement = document.getElementById('user-info');
     const logoutItem = document.getElementById('logout-item');
     const loginItem = document.getElementById('login-item');
+    const profileImageElement = document.getElementById('profile-image');
 
     if (userData) {
         const user = JSON.parse(userData);
-        // Tạo liên kết cho tên người dùng
+
         userInfoElement.innerHTML = `<a href="/Profile/Index?MaTaiKhoan=${encodeURIComponent(user.MaTaiKhoan)}" style="color: white; text-decoration: none">${user.TenTaiKhoan}</a>`;
+
+        if (user.ImageProfile)
+        {
+            profileImageElement.src = user.ImageProfile;
+        }
+        else
+        {
+            profileImageElement.src = '/Content/images/logo/icons8-male-user-100.png';
+        }
+
+        profileImageElement.style.visibility = 'visible';
+
         logoutItem.style.display = 'inline';
         loginItem.style.display = 'none';
-    } else {
-        userInfoElement.innerHTML = ''; // Đặt lại nếu không có người dùng
+    }
+    else
+    {
+        userInfoElement.innerHTML = '';
+
+        if (profileImageElement) {
+            profileImageElement.style.visibility = 'hidden';
+        }
+
         logoutItem.style.display = 'none';
         loginItem.style.display = 'inline';
     }
@@ -377,7 +397,7 @@ async function checkUsername(username) {
         return result.exists;
     } catch (error) {
         console.error("Có lỗi xảy ra khi kiểm tra tên đăng nhập:", error);
-        return false; // Hoặc xử lý lỗi theo cách khác
+        return false;
     }
 }
 
@@ -426,6 +446,57 @@ async function checkEmailResetPassword(email) {
         return result.exists;
     } catch (error) {
         console.error("Có lỗi xảy ra khi kiểm tra email reset password:", error);
-        return false; // Hoặc xử lý lỗi theo cách khác
+        return false;
     }
+}
+
+async function changePassword(email, currentpassword, updatepassword) {
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`;
+    const bodydata = {
+        email: email,
+        password: currentpassword,
+        returnSecureToken: true,
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bodydata),
+        });
+
+        const result = await response.json();
+        console.log(result);
+
+        // Kiểm tra xem có lỗi từ kết quả không
+        if (result.error) {
+            return false; // Mật khẩu cũ không chính xác
+        } else {
+            const url2 = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${apiKey}`;
+            const bodydata2 = {
+                idToken: result.idToken,
+                password: updatepassword,
+                returnSecureToken: true,
+            };
+
+            const response2 = await fetch(url2, {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(bodydata2),
+            });
+
+            const result2 = await response2.json();
+
+            console.log(result2);
+
+            if (!result2.error) {
+                logout();
+                return true; // Đổi mật khẩu thành công
+            }
+        }
+    } catch (error) {
+        console.error("Có lỗi xảy ra khi kiểm tra password:", error);
+    }
+
+    return false;
 }

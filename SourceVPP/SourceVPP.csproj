@@ -195,6 +195,7 @@
     <Content Include="Content\images\logo\free-shipping.png" />
     <Content Include="Content\images\logo\guaranteed.png" />
     <Content Include="Content\images\logo\icons8-back-100.png" />
+    <Content Include="Content\images\logo\icons8-check-100.png" />
     <Content Include="Content\images\logo\icons8-email-100.png" />
     <Content Include="Content\images\logo\icons8-error-100.png" />
     <Content Include="Content\images\logo\icons8-male-user-100.png" />
@@ -294,6 +295,8 @@
     <Content Include="Content\images\product\nnn.jpg" />
     <Content Include="Content\images\product\zenbook_14_oled_ux3405ma.PNG" />
     <Content Include="Content\js\carousel.js" />
+    <Content Include="Content\js\Cloudinary.js" />
+    <Content Include="Content\js\GHN.js" />
     <Content Include="Content\js\User.js" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -309,6 +312,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\LaptopController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -397,6 +401,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Address\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

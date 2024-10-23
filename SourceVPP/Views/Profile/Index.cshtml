@@ -13,17 +13,22 @@
         <div class="col-md-2" style="background-color: #F0F0F0">
             <div class="list-group mb-5">
                 <!-- Profile Section -->
-                <div class="text-center py-3">
+                <div class="py-3 d-flex align-items-center">
                     @if (Model.ImageProfile == null)
                     {
-                        <img src="~/Content/images/logo/icons8-male-user-100.png" class="rounded-circle" alt="Profile Image" style="width: 100px; height: 100px;">
+                        <img src="~/Content/images/logo/icons8-male-user-100.png" class="rounded-circle" alt="Profile Image" style="width: 60px; height: 60px; margin-right: 8px">
                     }
                     else
                     {
-                        <img src="@Model.ImageProfile" class="rounded-circle" alt="Profile Image" style="width: 100px; height: 100px;">
+                        <img src="@Model.ImageProfile" class="rounded-circle" alt="Profile Image" style="width: 60px; height: 60px; margin-right: 8px">
                     }
-                    <h5 class="mt-2">vnhyt964</h5>
-                    <a href="@Url.Action("Index", "Profile", new { MaTaiKhoan = ViewBag.MaTaiKhoan, view = "ProfilePartial" })" class="text-secondary">Sửa Hồ Sơ</a>
+                    <div>
+                        <!-- Khoảng cách giữa ảnh và text -->
+                        <p style="font-size: 15px" class="p-0 m-0 fw-bold">@Model.TenTaiKhoan</p>
+                        <a href="@Url.Action("Index", "Profile", new { MaTaiKhoan = ViewBag.MaTaiKhoan, view = "ProfilePartial" })" class="text-secondary" style="text-decoration: none; font-size: 15px">
+                            <i class="fas fa-pencil-alt"></i> Sửa Hồ Sơ
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Sidebar Menu Items -->

@@ -9,30 +9,31 @@
         <form id="profile-form" method="post" action="@Url.Action("UpdateProfile", "Profile")">
             <!-- Hidden input to pass MaTaiKhoan -->
             <input type="hidden" name="MaTaiKhoan" value="@Model.MaTaiKhoan" />
+            <input type="hidden" name="ImageProfile" id="imageProfile" value="@Model.ImageProfile" />
 
             <div class="form-group row mb-3">
-                <label class="col-sm-3 col-form-label">Tên đăng nhập</label>
+                <label class="col-sm-3 col-form-label text-end">Tên đăng nhập</label>
                 <div class="col-sm-9">
                     <p class="form-control-plaintext">@Model.TenTaiKhoan</p>
                 </div>
             </div>
 
             <div class="form-group row mb-3">
-                <label class="col-sm-3 col-form-label">Tên</label>
+                <label class="col-sm-3 col-form-label text-end">Tên</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="TenKhachHang" value="@Model.TenKhachHang" />
                 </div>
             </div>
 
             <div class="form-group row mb-3">
-                <label class="col-sm-3 col-form-label">Email</label>
+                <label class="col-sm-3 col-form-label text-end">Email</label>
                 <div class="col-sm-9">
                     <p class="form-control-plaintext">@Model.Email <a href="#">Thay Đổi</a></p>
                 </div>
             </div>
 
             <div class="form-group row mb-3">
-                <label class="col-sm-3 col-form-label">Giới tính</label>
+                <label class="col-sm-3 col-form-label text-end">Giới tính</label>
                 <div class="col-sm-9 d-flex align-items-center">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="Gender" value="Nam" @(Model.Gender == "Nam" ? "checked" : "")>
@@ -50,7 +51,7 @@
             </div>
 
             <div class="form-group row mb-3">
-                <label class="col-sm-3 col-form-label">Ngày sinh</label>
+                <label class="col-sm-3 col-form-label text-end">Ngày sinh</label>
                 <div class="col-sm-9">
                     <p id="display-dob" class="form-control-plaintext">
                         @(Model.DateOfBirth == null ? "Chưa có dữ liệu" : Model.DateOfBirth.Value.ToString("dd/MM/yyyy"))
@@ -63,13 +64,15 @@
                                 <i class="bi bi-calendar"></i>
                             </span>
                             <input type="date" class="form-control" name="DateOfBirth" id="dob" value="@(Model.DateOfBirth != null ? Model.DateOfBirth.Value.ToString("yyyy-MM-dd") : "")" />
+
                         </div>
                     </div>
+                    <span id="dob-error" class="text-danger" style="display: none; color: red; font-size: 12px;">Bạn phải đủ 16 tuổi.</span>
                 </div>
             </div>
 
             <div class="form-group row">
-                <div class="col-sm-9 offset-sm-3">
+                <div class="col-sm-9 offset-sm-3 mt-3">
                     <button type="submit" class="btn btn-danger">Lưu</button>
                 </div>
             </div>
@@ -80,20 +83,72 @@
     <div class="col-md-4 d-flex flex-column align-items-center text-center">
         @if (Model.ImageProfile == null)
         {
-            <img src="~/Content/images/logo/icons8-male-user-100.png" class="rounded-circle" alt="Profile Image" style="width: 100px; height: 100px;">
+            <img src="~/Content/images/logo/icons8-male-user-100.png" class="rounded-circle" alt="Profile Image" id="profileImagePreview" style="width: 100px; height: 100px;">
         }
         else
         {
-            <img src="@Model.ImageProfile" class="rounded-circle" alt="Profile Image" style="width: 100px; height: 100px;">
+            <img src="@Model.ImageProfile" class="rounded-circle" alt="Profile Image" id="profileImagePreview" style="width: 100px; height: 100px;">
         }
-        <button class="btn btn-light mt-3">Chọn Ảnh</button>
+        <input type="file" id="profileImage" accept=".jpg, .jpeg, .png" style="display: none;" />
+        <label for="profileImage" class="btn btn-light mt-3">Chọn Ảnh</label>
         <p class="text-muted">Dung lượng file tối đa 1 MB<br>Định dạng: JPEG, PNG</p>
     </div>
 </div>
 
+<div id="success-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img src="~/Content/images/logo/icons8-check-100.png" width="50" height="50" />
+                <p class="mt-3">Cập nhật hồ sơ</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    document.getElementById('change-dob').addEventListener('click', function () {
+    document.getElementById('change-dob').addEventListener('click', function (event) {
         document.getElementById('display-dob').style.display = 'none';
         document.getElementById('edit-dob').style.display = 'block';
+    });
+
+    document.getElementById('profileImage').addEventListener('change', async function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            if (file.size > 1024 * 1024) { // 1MB
+                alert("Dung lượng file tối đa 1 MB.");
+                return;
+            }
+
+            try {
+                const imageUrl = await uploadToCloudinary(file, 'user_avatar');
+
+                document.getElementById('profileImagePreview').src = imageUrl;
+                document.getElementById('imageProfile').value = imageUrl;
+
+            }
+            catch (error) {
+                console.error("Error: ", error);
+            }
+        }
+    });
+
+    document.getElementById('profile-form').addEventListener('submit', function (event) {
+        var dob = document.getElementById('dob').value;
+        var dobError = document.getElementById('dob-error');
+
+        if (dob) {
+            // Sử dụng hàm isOver16 để kiểm tra
+            if (!isOver16(dob)) {
+                event.preventDefault();
+                dobError.style.display = 'block'; 
+                return;
+            } else {
+                dobError.style.display = 'none';
+            }
+        }
+
+        var modal = new bootstrap.Modal(document.getElementById('success-modal'));
+        modal.show();
     });
 </script>

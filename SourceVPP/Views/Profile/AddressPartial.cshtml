@@ -1,4 +1,6 @@
-﻿<style>
+﻿@model SourceVPP.Models.user
+
+<style>
     .address-list {
         margin-top: 20px;
     }
@@ -25,10 +27,10 @@
         border-color: #6c757d;
     }
 
-        .btn-outline-secondary:hover {
-            background-color: #6c757d;
-            color: #fff;
-        }
+    .btn-outline-secondary:hover {
+        background-color: #6c757d;
+        color: #fff;
+    }
 
     .d-flex {
         display: flex;
@@ -63,9 +65,9 @@
         text-decoration: none;
     }
 
-        .text-primary:hover {
-            text-decoration: underline;
-        }
+    .text-primary:hover {
+        text-decoration: underline;
+    }
 
     .button-group {
         display: flex;
@@ -77,14 +79,14 @@
         transform: translateY(-50%); /* Căn giữa theo chiều dọc */
     }
 
-        .button-group a {
-            margin-bottom: 5px; /* Khoảng cách giữa các nút */
-        }
+    .button-group a {
+        margin-bottom: 5px; /* Khoảng cách giữa các nút */
+    }
 </style>
 
 <div class="d-flex justify-content-between align-items-center">
     <p style="font-size: 20px; font-weight: bold; margin: 0;">Địa chỉ của tôi</p>
-    <button class="btn btn-danger">+ Thêm địa chỉ mới</button>
+    <button class="btn btn-danger" id="addAddressButton" data-toggle="modal" data-target="#addAddressModal">+ Thêm địa chỉ mới</button>
 </div>
 <hr />
 
@@ -97,16 +99,108 @@
         <div class="d-flex justify-content-between">
             <div>
                 <button class="btn btn-outline-danger btn-sm mr-2">Mặc định</button>
-                <button class="btn btn-outline-secondary btn-sm">Địa chỉ lấy hàng</button>
             </div>
             <div class="button-group">
                 <!-- Khối chứa nút được căn giữa -->
                 <div>
-                    <a href="#" class="btn btn-link text-primary p-0 mr-2">Cập nhật</a>
-                    <a href="#" class="btn btn-link text-primary p-0 mr-2">Xóa</a>
+                    <a href="#" class="btn btn-link text-primary p-0 mr-2 updateAddressButton" style="text-decoration: none">Cập nhật</a>
+                    <a href="#" class="btn btn-link text-primary p-0 mr-2 deleteAddressButton" style="text-decoration: none">Xóa</a>
                 </div>
                 <button class="btn btn-light btn-sm">Thiết lập mặc định</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Modal thêm địa chỉ mới -->
+<div id="addAddressModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addAddressLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAddressLabel">Địa chỉ mới</h5>
+            </div>
+            <div class="modal-body">
+                <form id="addAddressForm">
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <input type="text" class="form-control mr-2" id="fullName" placeholder="Họ và tên" style="flex: 1;">
+                            <input type="text" class="form-control" id="phone" placeholder="Số điện thoại" style="flex: 1;">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <select class="form-control" id="city">
+                            <option value="" disabled selected>Chọn Tỉnh/Thành phố</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <select class="form-control" id="district">
+                            <option value="" disabled selected>Chọn Quận/Huyện</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <select class="form-control" id="ward">
+                            <option value="" disabled selected>Chọn Phường/Xã</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" id="specificAddress" placeholder="Địa chỉ cụ thể">
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="defaultAddress">
+                        <label class="form-check-label" for="defaultAddress">Đặt làm địa chỉ mặc định</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="backButton">Trở Lại</button>
+                <button type="button" class="btn btn-danger">Hoàn thành</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('addAddressButton').addEventListener('click', function () {
+            var addAddressModal = new bootstrap.Modal(document.getElementById('addAddressModal'));
+
+            resetModalFields();
+            addAddressModal.show();
+        });
+
+        document.getElementById('backButton').addEventListener('click', function () {
+            var addAddressModal = bootstrap.Modal.getInstance(document.getElementById('addAddressModal'));
+            addAddressModal.hide(); // Tắt modal
+        });
+
+        // Thêm sự kiện cho nút "Cập nhật"
+        document.querySelectorAll('.updateAddressButton').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault(); // Ngăn chặn hành động mặc định của liên kết
+
+                var fullName = this.getAttribute('data-fullname');
+                var phone = this.getAttribute('data-phone');
+                var specificAddress = this.getAttribute('data-specificaddress');
+                var city = this.getAttribute('data-city');
+                var district = this.getAttribute('data-district');
+                var ward = this.getAttribute('data-ward');
+
+                document.getElementById('fullName').value = fullName;
+                document.getElementById('phone').value = phone;
+                document.getElementById('specificAddress').value = specificAddress;
+                document.getElementById('city').value = city;
+                document.getElementById('district').value = district;
+                document.getElementById('ward').value = ward;
+
+                var addAddressModal = new bootstrap.Modal(document.getElementById('addAddressModal'));
+                addAddressModal.show();
+            });
+        });
+
+        // Bắt sự kiện nhấp chuột cho nút "Hoàn thành" trong modal thêm địa chỉ
+        document.getElementById('completeButton').addEventListener('click', function () {
+            
+        });
+    });
+</script>
