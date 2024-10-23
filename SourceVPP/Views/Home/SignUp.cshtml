@@ -142,8 +142,8 @@
                                                 <i class="bi bi-calendar"></i>
                                             </span>
                                             <input type="date" class="form-control" name="dob" id="dob">
+                                            <div class="invalid-feedback">Vui lòng nhập ngày sinh.</div>
                                         </div>
-                                        <div class="invalid-feedback">Vui lòng nhập ngày sinh.</div>
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label class="form-label">Giới tính</label>
@@ -161,7 +161,7 @@
                                                 <label class="form-check-label" for="unknownRadio">Khác</label>
                                             </div>
                                         </div>
-                                        <div class="invalid-feedback">Vui lòng nhập giới tính.</div>
+                                        <div class="invalid-feedback">Vui lòng chọn giới tính.</div>
                                     </div>
                                     <div class="col-12">
                                         <div class="d-grid">
@@ -240,31 +240,55 @@
                 cfpassword.classList.remove("is-invalid");
             }
 
-            if (dob.value.trim() === "") {
-                dob.classList.add("is-invalid");
-                isValid = false;
-            }
-            else if (!isOver16(dob.value))
+            if (dob.value.trim() === "")
             {
                 dob.classList.add("is-invalid");
                 const dobFeedback = dob.parentElement.querySelector('.invalid-feedback');
-                dobFeedback.innerText = "Bạn phải đủ 16 tuổi để đăng ký.";
-                dobFeedback.style.display = 'block';
+                if (dobFeedback)
+                {
+                    dobFeedback.innerText = "Vui lòng nhập ngày sinh.";
+                    dobFeedback.style.display = 'block';
+                }
                 isValid = false;
-            }
-            else {
+            } else if (!isOver16(dob.value))
+            {
+                dob.classList.add("is-invalid");
+                const dobFeedback = dob.parentElement.querySelector('.invalid-feedback');
+                if (dobFeedback)
+                {
+                    dobFeedback.innerText = "Bạn phải đủ 16 tuổi để đăng ký.";
+                    dobFeedback.style.display = 'block';
+                }
+                isValid = false;
+            } else
+            {
                 dob.classList.remove("is-invalid");
+                const dobFeedback = dob.parentElement.querySelector('.invalid-feedback');
+                if (dobFeedback)
+                {
+                    dobFeedback.style.display = 'none'; 
+                }
             }
 
-            if (!gender) {
-                document.querySelectorAll('input[name="gender"]').forEach(genderInput => {
+            if (!gender)
+            {
+                document.querySelectorAll('input[name="gender"]').forEach(genderInput =>
+                {
                     genderInput.classList.add("is-invalid");
                 });
+                const genderFeedback = document.querySelector('input[name="gender"]').closest('.col-12').querySelector('.invalid-feedback');
+                genderFeedback.innerText = "Vui lòng chọn giới tính.";
+                genderFeedback.style.display = 'block';
                 isValid = false;
-            } else {
-                document.querySelectorAll('input[name="gender"]').forEach(genderInput => {
+            }
+            else
+            {
+                document.querySelectorAll('input[name="gender"]').forEach(genderInput =>
+                {
                     genderInput.classList.remove("is-invalid");
                 });
+                const genderFeedback = document.querySelector('input[name="gender"]').closest('.col-12').querySelector('.invalid-feedback');
+                genderFeedback.style.display = 'none';
             }
 
             if (isValid) {
