@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using SourceVPP.Models;
@@ -22,6 +24,11 @@ namespace SourceVPP.Controllers
                 if (dbUser != null)
                 {
                     return View(dbUser); // Trả về view với đối tượng người dùng
+                }
+                else
+                {
+                    // Trường hợp không tìm thấy tài khoản
+                    return View("Error", new { message = "Không tìm thấy tài khoản" });
                 }
             }
 
@@ -47,11 +54,12 @@ namespace SourceVPP.Controllers
         {
             if (!string.IsNullOrEmpty(MaTaiKhoan))
             {
-                var dbUser = db.users.FirstOrDefault(u => u.MaTaiKhoan == MaTaiKhoan);
+                var dbUser = db.users.Include("addresses").FirstOrDefault(u => u.MaTaiKhoan == MaTaiKhoan);
+                var adrs = db.addresses.Where(a => a.MaTaiKhoan == MaTaiKhoan).ToList();
 
                 if (dbUser != null)
                 {
-                    return PartialView(dbUser); // Truyền thông tin user từ database vào view
+                    return PartialView(adrs); // Truyền thông tin user từ database vào view
                 }
             }
 

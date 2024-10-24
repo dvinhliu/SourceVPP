@@ -1,8 +1,11 @@
 ﻿const apiKey = "AIzaSyC7PsMUUTQancVCjMl0NnbDVDl0tpWdZDY";
 
 function fetchUserData() {
-    const token = localStorage.getItem('token'); // Giữ token trong localStorage
-    if (!token) return; // Không làm gì nếu không có token
+    const token = localStorage.getItem('token');
+    if (!token) {
+        console.error('Không có token, không thể truy cập dữ liệu người dùng.');
+        return;
+    }
 
     fetch('/User/GetUser', {
         method: 'GET',
@@ -11,47 +14,35 @@ function fetchUserData() {
         }
     })
         .then(response => {
-            if (response.status === 401) {
-                return refreshToken().then(() => fetchUserData());
+            if (!response.ok) {
+                console.error(`Lỗi ${response.status}: ${response.statusText}`);
+                return response.json().then(data => {
+                    console.log("Lỗi:", data.message);
+                    logout(); // Gọi hàm logout nếu có lỗi
+                });
             }
-            return response.json();
+            return response.json(); // Chú ý: đây là hàm trả về một promise
         })
         .then(data => {
             if (data.success) {
-                sessionStorage.setItem('user', JSON.stringify(data.user)); // Lưu thông tin người dùng vào sessionStorage
-                displayUserName();
+                // Lưu thông tin người dùng vào sessionStorage
+                const user = {
+                    MaTaiKhoan: data.MaTaiKhoan,
+                    TenTaiKhoan: data.TenTaiKhoan,
+                    ImageProfile: data.ImageProfile
+                };
+                sessionStorage.setItem('user', JSON.stringify(user)); // Lưu đối tượng JSON
+
+                // Hiển thị thông tin người dùng
+                displayUserName(); // Đảm bảo hàm này sử dụng dữ liệu từ sessionStorage
             } else {
-                logout();
                 console.log("Lỗi:", data.message);
+                logout(); // Gọi hàm logout nếu không thành công
             }
         })
         .catch(error => {
             console.error('Có lỗi xảy ra:', error);
-            logout();
-        });
-}
-
-function refreshToken() {
-    return fetch('/User/RefreshToken', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ RefreshToken: localStorage.getItem('refreshToken') }) // Sửa để lấy token đúng cách
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Không thể làm mới token");
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.success) {
-                localStorage.setItem('token', data.token);
-                console.log("Token mới đã được lưu.");
-            } else {
-                console.log("Lỗi khi làm mới token:", data.message);
-            }
+            logout(); // Gọi hàm logout nếu có lỗi
         });
 }
 
@@ -235,6 +226,33 @@ async function saveUserDataToSQL(data) {
         }
     } catch (error) {
         console.error("Có lỗi xảy ra khi lưu vào SQL Server:", error);
+    }
+}
+
+async function SaveUserAddressToSQL(data) {
+    try {
+        const response = await fetch('/Address/SaveUserAddress', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            console.error("Lỗi khi lưu dữ liệu:", errorText);
+            return;
+        }
+
+        const result = await response.json();
+
+        if (result.success) {
+            console.log(result.message);
+        }
+        else {
+            console.error("Có lỗi khi lưu dữ liệu địa chỉ: ", result.message);
+        }
+    }
+    catch (error) {
+        console.log("Có lỗi xảy ra khi lưu địa chỉ vào SQL Server: ", error);
     }
 }
 
@@ -499,4 +517,63 @@ async function changePassword(email, currentpassword, updatepassword) {
     }
 
     return false;
+}
+
+function isValidPhoneNumber(phone) {
+    const phonePattern = /^[0-9]{1,10}$/;
+    return phonePattern.test(phone);
+}
+
+async function SaveSetDefault(addressid) {
+    try {
+        const response = await fetch('/Address/SaveSetDefault', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ address_id: addressid }), // Đảm bảo truyền dữ liệu đúng định dạng
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text(); // Lấy lỗi nếu có
+            console.error("Lỗi khi lưu dữ liệu:", errorText);
+            return;
+        }
+
+        const result = await response.json();
+
+        if (result.success) {
+            console.log(result.message);
+            location.reload(); // Tải lại trang để cập nhật thông tin
+        } else {
+            console.error("Có lỗi khi thiết lập mặc định: ", result.message);
+        }
+    } catch (error) {
+        console.log("Có lỗi xảy ra khi lưu thiết lập mặc định vào SQL Server: ", error);
+    }
+}
+
+async function DeleteUserAddress(addressid) {
+    try {
+        const response = await fetch('/Address/DeleteUserAddress', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ address_id: addressid }), // Đảm bảo truyền dữ liệu đúng định dạng
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text(); // Lấy lỗi nếu có
+            console.error("Lỗi khi lưu dữ liệu:", errorText);
+            return;
+        }
+
+        const result = await response.json();
+
+        if (result.success) {
+            console.log(result.message);
+            location.reload(); // Tải lại trang để cập nhật thông tin
+        } else {
+            console.error("Có lỗi khi xóa địa chỉ ", result.message);
+        }
+    } catch (error) {
+        console.log("Có lỗi xảy ra khi xóa địa chỉ vào SQL Server: ", error);
+    }
 }

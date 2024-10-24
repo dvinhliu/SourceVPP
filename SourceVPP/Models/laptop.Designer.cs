@@ -20,9 +20,9 @@ namespace SourceVPP.Models
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-	
-	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="laptop")]
+    using System.Threading.Tasks;
+
+    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="laptop")]
 	public partial class laptopDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -52,7 +52,13 @@ namespace SourceVPP.Models
     partial void Updatehang(hang instance);
     partial void Deletehang(hang instance);
     partial void Inserthoadon(hoadon instance);
-    partial void Updatehoadon(hoadon instance);
+
+        internal Task SubmitChangesAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        partial void Updatehoadon(hoadon instance);
     partial void Deletehoadon(hoadon instance);
     partial void Insertsanpham(sanpham instance);
     partial void Updatesanpham(sanpham instance);
@@ -518,7 +524,7 @@ namespace SourceVPP.Models
 			this._hoadons = new EntitySet<hoadon>(new Action<hoadon>(this.attach_hoadons), new Action<hoadon>(this.detach_hoadons));
 			OnCreated();
 		}
-		
+
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaTaiKhoan", DbType="NVarChar(255) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string MaTaiKhoan
 		{

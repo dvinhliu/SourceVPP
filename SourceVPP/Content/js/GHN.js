@@ -89,15 +89,12 @@ async function initAddressDropdowns() {
         const wards = await getWards(selectedDistrictId);
         wards.forEach(ward => {
             const option = document.createElement('option');
-            option.value = ward.WardID; // WardID là ID phường
+            option.value = ward.WardCode; // WardID là ID phường
             option.textContent = ward.WardName; // WardName là tên phường
             wardSelect.appendChild(option);
         });
     });
 }
-
-document.addEventListener('DOMContentLoaded', initAddressDropdowns);
-
 
 function resetModalFields() {
     document.getElementById('fullName').value = '';

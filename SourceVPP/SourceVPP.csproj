@@ -198,6 +198,7 @@
     <Content Include="Content\images\logo\icons8-check-100.png" />
     <Content Include="Content\images\logo\icons8-email-100.png" />
     <Content Include="Content\images\logo\icons8-error-100.png" />
+    <Content Include="Content\images\logo\icons8-location-100.png" />
     <Content Include="Content\images\logo\icons8-male-user-100.png" />
     <Content Include="Content\images\logo\iconsearch.png" />
     <Content Include="Content\images\logo\LienHe.png" />
@@ -377,6 +378,13 @@
     <Content Include="Content\images\product\MacbookPro14M2Pro10CPU16GPU.webp" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="App_Data\firebase-config.json" />
+    <Content Include="Views\Home\SignUp.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
+    <Content Include="Views\Home\ResetPassword.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\ProfilePartial.cshtml" />
+    <Content Include="Views\Profile\ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Profile\OrderPartial.cshtml" />
     <Content Include="Models\laptop.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>laptop.designer.cs</LastGenOutput>
@@ -385,14 +393,7 @@
     <None Include="Models\laptop.dbml.layout">
       <DependentUpon>laptop.dbml</DependentUpon>
     </None>
-    <Content Include="Views\Home\SignUp.cshtml" />
-    <Content Include="Views\Home\ForgotPassword.cshtml" />
-    <Content Include="Views\Home\ResetPassword.cshtml" />
-    <Content Include="Views\Profile\Index.cshtml" />
-    <Content Include="Views\Profile\ProfilePartial.cshtml" />
     <Content Include="Views\Profile\AddressPartial.cshtml" />
-    <Content Include="Views\Profile\ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Profile\OrderPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

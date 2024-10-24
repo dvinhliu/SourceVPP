@@ -32,7 +32,7 @@ namespace SourceVPP.Controllers
                 var user = db.users.SingleOrDefault(u => u.MaTaiKhoan == uid);
                 if (user != null)
                 {
-                    return Json(new { success = true, user }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = true, user.MaTaiKhoan, user.TenTaiKhoan, user.ImageProfile }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -72,31 +72,6 @@ namespace SourceVPP.Controllers
             {
                 return Json(new { error = ex.Message });
             }
-        }
-
-        // POST: User/RefreshToken
-        [System.Web.Http.HttpPost]
-        public async Task<ActionResult> RefreshToken([FromBody] TokenRequest request)
-        {
-            // Kiểm tra refresh token và lấy ID token mới
-            try
-            {
-                string newToken = await RefreshTokenAsync(request.RefreshToken);
-                return Json(new { success = true, token = newToken });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { success = false, message = ex.Message });
-            }
-        }
-
-        private async Task<string> RefreshTokenAsync(string refreshToken)
-        {
-            // Xác minh và làm mới token
-            // Thực hiện yêu cầu đến Firebase Authentication để lấy token mới
-            var auth = FirebaseAuth.DefaultInstance;
-            var newToken = await auth.CreateCustomTokenAsync(refreshToken); // Đây chỉ là ví dụ, bạn cần điều chỉnh cho đúng
-            return newToken;
         }
 
         public ActionResult SaveUserData(user userData)
